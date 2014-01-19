@@ -43,7 +43,7 @@ local.properties
 
 # Build results
 
-**/SQLiteWinRTPhone/Debug
+SQLiteWinRTPhone/Debug/
 [Dd]ebug/
 [Rr]elease/
 x64/
