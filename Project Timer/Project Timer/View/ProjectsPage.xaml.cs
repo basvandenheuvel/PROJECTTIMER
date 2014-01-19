@@ -22,14 +22,22 @@ namespace Project_Timer
             //BuildLocalizedApplicationBar();
         }
 
-        private void AddProjectClicked(object sender, EventArgs e)
-        {
-
-        }
-
         private void AboutClicked(object sender, EventArgs e)
         {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                App.RootFrame.Navigate(new Uri("/View/AboutPage.xaml?key=3", UriKind.RelativeOrAbsolute));
 
+            });
+        }
+
+        private void AddProjectClicked(object sender, EventArgs e)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                App.RootFrame.Navigate(new Uri("/View/AddProjectPage.xaml", UriKind.RelativeOrAbsolute));
+
+            });
         }
     }
 }
