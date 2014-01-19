@@ -11,10 +11,10 @@ using Project_Timer.Resources;
 
 namespace Project_Timer
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class ProjectsPage : PhoneApplicationPage
     {
         // Constructor
-        public MainPage()
+        public ProjectsPage()
         {
             InitializeComponent();
 
