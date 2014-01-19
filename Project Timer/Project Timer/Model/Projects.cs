@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Project_Timer.Model
 {
@@ -16,7 +17,8 @@ namespace Project_Timer.Model
             Statement statement = await DatabaseConnection.Db.PrepareStatementAsync(query);
             while (await statement.StepAsync())
             {
-                projects.Add(new Project(Convert.ToInt32(statement.GetTextAt(0))));
+                MessageBox.Show("test");
+                //projects.Add(new Project(Convert.ToInt32(statement.GetTextAt(0))));
             }
             return projects;
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project_Timer.Model
 {
-    class Project : INotifyPropertyChanged
+    public class Project : INotifyPropertyChanged
     {
         private int id;
         private String name;
@@ -64,7 +64,7 @@ namespace Project_Timer.Model
             }
             else
             {
-                dbCreate();
+                dbInsert();
             }
         }
 
@@ -74,7 +74,7 @@ namespace Project_Timer.Model
             await DatabaseConnection.Db.ExecuteStatementAsync(query);
         }
 
-        private async void dbCreate()
+        private async void dbInsert()
         {
             string query = "INSERT INTO project (name, description, client, deadline, statuses_id) VALUES ('" + name + "','" + description + "', '" + client + "', '" + deadline + "', " + status_id + ")";
             await DatabaseConnection.Db.ExecuteStatementAsync(query);

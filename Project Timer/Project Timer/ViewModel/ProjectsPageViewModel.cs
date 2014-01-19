@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Project_Timer.ViewModel
 {
-    class ProjectsPageViewModel 
+    public class ProjectsPageViewModel 
     {
         private Projects projectsModel = new Projects();
 

@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Project_Timer.Resources;
+using Project_Timer.Model;
 
 namespace Project_Timer
 {
@@ -61,6 +62,9 @@ namespace Project_Timer
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            //Create the tables for the database
+            DatabaseConnection.createTables();
+            DatabaseConnection.fillStatusTable();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -114,7 +118,7 @@ namespace Project_Timer
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
+            RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures
