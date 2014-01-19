@@ -1,0 +1,19 @@
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Assets\ApplicationIcon.png
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Assets\Tiles\FlipCycleTileSmall.png
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Assets\Tiles\IconicTileMediumLarge.png
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Assets\Tiles\IconicTileSmall.png
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Project Timer.dll
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Project Timer.pdb
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\AppManifest.xaml
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Properties\WMAppManifest.xml
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\Bin\Debug\Project_Timer_Debug_AnyCPU.xap
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\App.g.cs
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\MainPage.g.cs
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\Project Timer.g.resources
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\Project_Timer.Resources.AppResources.resources
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\Project Timer.csproj.GenerateResource.Cache
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\Project Timer.dll
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\Project Timer.pdb
+C:\Users\Bas van den Heuvel\Documents\GitHub\PROJECTTIMER\Project Timer\Project Timer\obj\Debug\XapCacheFile.xml
