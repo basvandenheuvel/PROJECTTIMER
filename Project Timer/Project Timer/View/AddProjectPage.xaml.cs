@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Project_Timer.Model;
+using Project_Timer.ViewModel;
 
 namespace Project_Timer.View
 {
@@ -19,12 +21,11 @@ namespace Project_Timer.View
 
         private void saveButtonClicked(object sender, EventArgs e)
         {
-            //Temp
-            MessageBox.Show("Project toevoegen: " + txt_Name.Text + " - " + txt_Description.Text + " - " + date_Deadline.Value.ToString() + " - " + txt_Client.Text);
+            //Get the viewmodel
+            AddProjectPageViewModel vm = (AddProjectPageViewModel)LayoutRoot.DataContext;
 
-            //Save the new project in the database
-
-            //Redirect to the project page of the new project
+            //Call the save method in the viewModel
+            vm.saveProject(txt_Name.Text, txt_Description.Text, txt_Client.Text, date_Deadline.Value);
         }
 
         private void cancelButtonClicked(object sender, EventArgs e)

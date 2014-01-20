@@ -52,7 +52,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Bin\x86\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;USE_WP8_NATIVE_SQLITE</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
@@ -96,8 +96,11 @@
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\DatabaseConnection.cs" />
     <Compile Include="Model\DelegateCommand.cs" />
-    <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\Tables.cs" />
     <Compile Include="Model\Projects.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="ViewModel\AddProjectPageViewModel.cs" />
     <Compile Include="ViewModel\ProjectsPageViewModel.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -185,9 +188,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SQLiteWinRTPhone\SQLiteWinRTPhone.vcxproj">
-      <Project>{4AE0193F-5986-404E-87B6-1EC9301D16D8}</Project>
-      <Name>SQLiteWinRT</Name>
+    <ProjectReference Include="..\sqlite-net-wp8-master\Sqlite.vcxproj">
+      <Project>{59B35F6C-E062-4F0E-88D8-13F3F82A24F3}</Project>
+      <Name>Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

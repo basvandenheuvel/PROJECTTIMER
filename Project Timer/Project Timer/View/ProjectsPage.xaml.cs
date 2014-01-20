@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Project_Timer.Resources;
+using Project_Timer.Model;
+using Project_Timer.ViewModel;
 
 namespace Project_Timer
 {
@@ -17,27 +19,29 @@ namespace Project_Timer
         public ProjectsPage()
         {
             InitializeComponent();
-
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+            //List<Status> statuses = DatabaseConnection.conn.Table<Status>().ToList<Status>();
+            //foreach (var s in statuses)
+            //{
+            //    MessageBox.Show("" + s);
+            //}
         }
 
         private void AboutClicked(object sender, EventArgs e)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                App.RootFrame.Navigate(new Uri("/View/AboutPage.xaml?key=3", UriKind.RelativeOrAbsolute));
-
-            });
+            App.RootFrame.Navigate(new Uri("/View/AboutPage.xaml?key=3", UriKind.RelativeOrAbsolute));
         }
 
         private void AddProjectClicked(object sender, EventArgs e)
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                App.RootFrame.Navigate(new Uri("/View/AddProjectPage.xaml", UriKind.RelativeOrAbsolute));
+        {           
+            App.RootFrame.Navigate(new Uri("/View/AddProjectPage.xaml", UriKind.RelativeOrAbsolute));
+        }
 
-            });
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            //((ProjectsPageViewModel)DataContext).getProjects();
+
+            ProjectsPageViewModel vm = (ProjectsPageViewModel)LayoutRoot.DataContext;
+            vm.getProjects();            
         }
     }
 }

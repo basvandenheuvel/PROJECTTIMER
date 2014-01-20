@@ -71,9 +71,9 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding ProjectName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding ProjectDescription}" TextWrapping="Wrap" MaxHeight="30" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Text="{Binding ProjectDeadline, StringFormat='Deadline: {0}'}" MaxHeight="30" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding description}" TextWrapping="Wrap" MaxHeight="30" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Text="{Binding deadline, StringFormat='Deadline: {0}'}" MaxHeight="30" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
                                 <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Grid.Column="2" Text="{Binding ProjectTasks, StringFormat='{}{0} tasks'}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
                             </Grid>
                         </DataTemplate>

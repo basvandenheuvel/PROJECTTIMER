@@ -12,31 +12,28 @@ namespace Project_Timer.ViewModel
 {
     public class ProjectsPageViewModel 
     {
-        private Projects projectsModel = new Projects();
+        ////Collection of projectmodels
+        private ObservableCollection<Project> projects;
 
-        //Collection of projectmodels
-        private ObservableCollection<Project> projects = new ObservableCollection<Project>();
-
-        //Commands
+        ////Commands
         private DelegateCommand aboutButtonCommand;
         private DelegateCommand settingsButtonCommand;
 
         public ProjectsPageViewModel()
         {
-            projectsModel.addProject("Project c# 2013", "In dit project gaan we met c# een programma maken om van alles bij te kunnen houden.", "11-11-2013", "Contrive");
-            projectsModel.addProject("Aapjes gooien", "Geweldig spel waarbij je met apen moet gooien!", "03-10-2014", "BCC");
-            projectsModel.addProject("Webshop", "Webshop maken zonder back-end voor het vak PHP", "03-10-2014", "Avans");
+            projects = new ObservableCollection<Project>();
+            //DatabaseConnection.conn.Insert(new Project() { description = "Een heel leuk projectje", name = "Webshopje", deadline = new DateTime(2014, 01, 01) });
 
-            getInformation();
             createCommands();
         }
 
-        private async void getInformation()
+        public void getProjects()
         {
-            List<Project> projectsList = await projectsModel.getProjects();
-            foreach (Project project in projectsList)
+            projects.Clear();
+
+            foreach (var s in DatabaseConnection.conn.Table<Project>())
             {
-                projects.Add(project);
+                projects.Add(s);
             }
         }
 

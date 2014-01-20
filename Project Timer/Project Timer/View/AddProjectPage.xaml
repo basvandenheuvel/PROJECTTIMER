@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:vm="clr-namespace:Project_Timer.ViewModel"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -38,6 +39,10 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <ScrollViewer>
         <Grid x:Name="LayoutRoot" Background="Transparent">
+            <Grid.DataContext>
+                <vm:AddProjectPageViewModel/>
+            </Grid.DataContext>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -59,10 +64,10 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Project name" Grid.Row="0" Margin="12,6,0,0" />
+                <TextBlock Text="Name*" Grid.Row="0" Margin="12,6,0,0" />
                 <toolkit:PhoneTextBox Name="txt_Name" Margin="0,30,0,0" InputScope="Text" Padding="10,0,0,0" Grid.Row="0" BorderThickness="0" Height="70" MaxLength="45" />
 
-                <TextBlock Text="Description" Grid.Row="1" Margin="12,6,0,0" />
+                <TextBlock Text="Description*" Grid.Row="1" Margin="12,6,0,0" />
                 <toolkit:PhoneTextBox Name="txt_Description"  Margin="0,30,0,0" InputScope="Text" Height="190" Grid.Row="1" Padding="10,0,0,0" AcceptsReturn="True" TextWrapping="Wrap"/>
 
                 <TextBlock Text="Deadline" Grid.Row="2" Margin="12,6,0,0" />
