@@ -54,7 +54,7 @@ namespace Project_Timer.View
 
         private void AddTaskClicked(object sender, EventArgs e)
         {
-
+            App.RootFrame.Navigate(new Uri("/View/AddTaskPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
         }
     }
 }

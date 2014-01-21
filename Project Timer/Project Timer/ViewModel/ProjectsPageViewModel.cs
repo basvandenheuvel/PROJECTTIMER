@@ -13,7 +13,7 @@ namespace Project_Timer.ViewModel
     public class ProjectsPageViewModel 
     {
         //Collection of projects
-        public ObservableCollection<Project> projects;
+        private ObservableCollection<Project> projects;
 
         //Commands
         private DelegateCommand aboutButtonCommand;
