@@ -2539,6 +2539,11 @@ namespace SQLite
 			var query = this.Take (1);
 			return query.ToList<T>().FirstOrDefault ();
 		}
+
+        internal void Join<T1>()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 	public static class SQLite3

@@ -22,12 +22,11 @@ namespace Project_Timer.ViewModel
         public ProjectsPageViewModel()
         {
             projects = new ObservableCollection<Project>();
-            //DatabaseConnection.conn.Insert(new Project() { description = "Een heel leuk projectje", name = "Webshopje", deadline = new DateTime(2014, 01, 01) });
 
             createCommands();
         }
 
-        public void getProjects()
+        public void refreshProjects()
         {
             projects.Clear();
 
@@ -35,6 +34,26 @@ namespace Project_Timer.ViewModel
             {
                 projects.Add(s);
             }
+        }
+
+        public void deleteProject(int id)
+        {
+            //TODO: TESTEN!!!!
+
+            //Delete all worktime belonging to the project
+            DatabaseConnection.conn.Query<Project>( "DELETE " +
+                                                    "FROM Worktime " +
+                                                    "WHERE task_id IN (SELECT id FROM Task WHERE project_id = " + id + ")");
+
+            //Delete all tasks belonging to the project
+            DatabaseConnection.conn.Query<Project>( "DELETE " +
+                                                    "FROM Task " +
+                                                    "WHERE project_id = " + id);
+
+            //Delete the project
+            DatabaseConnection.conn.Query<Project>( "DELETE " +
+                                                    "FROM Project " +
+                                                    "WHERE id = " + id);
         }
 
         #region properties
