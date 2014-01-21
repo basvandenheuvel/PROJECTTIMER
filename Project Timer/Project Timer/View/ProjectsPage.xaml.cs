@@ -19,8 +19,6 @@ namespace Project_Timer
         //Get the viewModel
         private ProjectsPageViewModel vm;
 
-        private object testobject;
-
         // Constructor
         public ProjectsPage()
         {
@@ -54,38 +52,25 @@ namespace Project_Timer
 
         private void deleteProjectClicked(object sender, RoutedEventArgs e)
         {
-            if (testobject == sender)
-            {
-                MessageBox.Show("gelijk");
-                testobject = sender;
-            }
-            else
-            {
-                MessageBox.Show("niet gelijk");
-                testobject = sender;
-            }
             //Get the project
-            Project temp = (Project)((MenuItem)sender).DataContext;
+            Project project = (Project)((MenuItem)sender).DataContext;
             
-            //Prompt the user if he/she is shure 
-            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the project " + temp.name + "?", "Delete project?", MessageBoxButton.OKCancel);
+            //Prompt the user if he/she is sure 
+            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the project " + project.name + "?", "Delete project?", MessageBoxButton.OKCancel);
             
             if (mbr == MessageBoxResult.OK)
             {
                 //Delete project
-                vm.deleteProject(temp.id);
-                
-                //Reload the project list
-                refreshProjects();
+                vm.deleteProject(project);
             }
         }
 
         private void projectClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            Project temp = (Project)((Grid)sender).DataContext;
+            Project project = (Project)((Grid)sender).DataContext;
             
             //Open taskpage
-            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ temp.id, UriKind.RelativeOrAbsolute));
+            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ project.id, UriKind.RelativeOrAbsolute));
         }
 
 

@@ -28,34 +28,34 @@ namespace Project_Timer.ViewModel
 
         public void refreshProjects()
         {
-            projects.Clear();
+            Projects.Clear();
 
             foreach (var s in DatabaseConnection.conn.Table<Project>())
             {
-                projects.Add(s);
+                Projects.Add(s);
             }
         }
 
-        public void deleteProject(int id)
+        public void deleteProject(Project project)
         {
             //TODO: TESTEN!!!!
 
             //Delete all worktime belonging to the project
             DatabaseConnection.conn.Query<Project>( "DELETE " +
                                                     "FROM Worktime " +
-                                                    "WHERE task_id IN (SELECT id FROM Task WHERE project_id = " + id + ")");
+                                                    "WHERE task_id IN (SELECT id FROM Task WHERE project_id = " + project.id + ")");
 
             //Delete all tasks belonging to the project
             DatabaseConnection.conn.Query<Project>( "DELETE " +
                                                     "FROM Task " +
-                                                    "WHERE project_id = " + id);
+                                                    "WHERE project_id = " + project.id);
 
             //Delete the project
             DatabaseConnection.conn.Query<Project>( "DELETE " +
                                                     "FROM Project " +
-                                                    "WHERE id = " + id);
+                                                    "WHERE id = " + project.id);
 
-            MessageBox.Show("" + DatabaseConnection.conn.Table<Project>().Count());
+            Projects.Remove(project);
         }
 
         #region properties
