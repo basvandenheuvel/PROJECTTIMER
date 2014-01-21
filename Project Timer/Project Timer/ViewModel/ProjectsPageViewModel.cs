@@ -12,10 +12,10 @@ namespace Project_Timer.ViewModel
 {
     public class ProjectsPageViewModel 
     {
-        ////Collection of projectmodels
-        private ObservableCollection<Project> projects;
+        //Collection of projects
+        public ObservableCollection<Project> projects;
 
-        ////Commands
+        //Commands
         private DelegateCommand aboutButtonCommand;
         private DelegateCommand settingsButtonCommand;
 
@@ -54,6 +54,8 @@ namespace Project_Timer.ViewModel
             DatabaseConnection.conn.Query<Project>( "DELETE " +
                                                     "FROM Project " +
                                                     "WHERE id = " + id);
+
+            MessageBox.Show("" + DatabaseConnection.conn.Table<Project>().Count());
         }
 
         #region properties

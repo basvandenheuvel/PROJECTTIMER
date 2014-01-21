@@ -19,11 +19,14 @@ namespace Project_Timer
         //Get the viewModel
         private ProjectsPageViewModel vm;
 
+        private object testobject;
+
         // Constructor
         public ProjectsPage()
         {
             InitializeComponent();
 
+            //Set the viewmodel of this view
             vm = (ProjectsPageViewModel)LayoutRoot.DataContext;
         }
 
@@ -51,9 +54,19 @@ namespace Project_Timer
 
         private void deleteProjectClicked(object sender, RoutedEventArgs e)
         {
+            if (testobject == sender)
+            {
+                MessageBox.Show("gelijk");
+                testobject = sender;
+            }
+            else
+            {
+                MessageBox.Show("niet gelijk");
+                testobject = sender;
+            }
             //Get the project
             Project temp = (Project)((MenuItem)sender).DataContext;
-
+            
             //Prompt the user if he/she is shure 
             MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the project " + temp.name + "?", "Delete project?", MessageBoxButton.OKCancel);
             
@@ -61,9 +74,9 @@ namespace Project_Timer
             {
                 //Delete project
                 vm.deleteProject(temp.id);
-
+                
                 //Reload the project list
-                refreshProjects(); 
+                refreshProjects();
             }
         }
 

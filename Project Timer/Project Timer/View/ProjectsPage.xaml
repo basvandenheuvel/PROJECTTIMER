@@ -51,11 +51,11 @@
                     <!--Message when there are no proejcts to show-->
                     <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="There are no projects." Height="50" Margin="15,0,150,481" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
 
-                    <phone:LongListSelector Margin="-12,0,0,0" ItemsSource="{Binding Projects}">
+                    <phone:LongListSelector x:Name="listLong" Margin="-12,0,0,0" ItemsSource="{Binding Projects}">
                         <phone:LongListSelector.ItemTemplate>
-                            <DataTemplate x:Name="templ">
+                            <DataTemplate>
 
-                                <Grid Margin="15,0,0,0" Tap="projectClicked" >
+                                <Grid Margin="15,0,0,0" Tap="projectClicked" >                                    
                                     <toolkit:ContextMenuService.ContextMenu>
                                         <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
                                             <toolkit:MenuItem x:Name="Delete" Header="delete project" Click="deleteProjectClicked"  />
@@ -78,40 +78,11 @@
                                     <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Text="{Binding deadline, StringFormat='Deadline: {0}'}" MaxHeight="30" TextWrapping="Wrap" Margin="15,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
                                     <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Grid.Column="2" Text="{Binding ProjectTasks, StringFormat='{}{0} tasks'}" TextWrapping="Wrap" Margin="15,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
                                 </Grid>
+                                
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
                     </phone:LongListSelector>
-
-                <!--<toolkit:LongListMultiSelector Margin="-12,0,0,0" ItemsSource="{Binding Projects}">
-                    <toolkit:LongListMultiSelector.ItemTemplate>
-                        <DataTemplate x:Name="templ">
-
-                            <Grid Margin="-12,-15,0,18" Tap="projectClicked" >
-                                <toolkit:ContextMenuService.ContextMenu>
-                                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
-                                        <toolkit:MenuItem x:Name="Delete" Header="delete project" Click="deleteProjectClicked"  />
-                                    </toolkit:ContextMenu>
-                                </toolkit:ContextMenuService.ContextMenu>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="225"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Visibility="Collapsed" Text="{Binding id}" />
-                                <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding description}" TextWrapping="Wrap" MaxHeight="30" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Text="{Binding deadline, StringFormat='Deadline: {0}'}" MaxHeight="30" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
-                                <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Grid.Column="2" Text="{Binding ProjectTasks, StringFormat='{}{0} tasks'}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </toolkit:LongListMultiSelector.ItemTemplate>
-                </toolkit:LongListMultiSelector>-->
+                    
                 </Grid>
             </phone:PivotItem>
 
