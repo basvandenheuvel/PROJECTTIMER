@@ -51,7 +51,6 @@ namespace Project_Timer.Model
                 conn.DeleteAll<Worktime>();
                 conn.DeleteAll<Task>();
                 conn.DeleteAll<Project>();
-                conn.DeleteAll<Status>();
             }
         }
     }
