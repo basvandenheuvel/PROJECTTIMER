@@ -42,7 +42,7 @@ namespace Project_Timer.View
         private void saveButtonClicked(object sender, EventArgs e)
         {
             //Call the save method in the viewModel
-            vm.saveTask(txt_Name.Text, txt_Description.Text, ((Status)lis_Status.SelectedItem).id, projectId);
+            vm.saveTask(txt_Name.Text, txt_Description.Text, projectId);
         }
 
         private void cancelButtonClicked(object sender, EventArgs e)

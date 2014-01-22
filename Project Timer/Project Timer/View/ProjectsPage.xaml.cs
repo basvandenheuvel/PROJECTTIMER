@@ -48,6 +48,9 @@ namespace Project_Timer
         {
             //Reload the project list
             refreshProjects();  
+
+            //Set default pivot page
+            mainPivot.SelectedIndex = 0;
         }
 
         private void deleteProjectClicked(object sender, RoutedEventArgs e)
@@ -63,7 +66,14 @@ namespace Project_Timer
                 //Delete project
                 vm.deleteProject(project);
 
-                checkAmountOfProjects();
+                if (project.finished)
+                {
+                    checkAmountOfFinishedProjects();
+                }
+                else
+                {
+                    checkAmountOfProjects();
+                }
             }
         }
 
@@ -81,14 +91,52 @@ namespace Project_Timer
             vm.refreshProjects();
 
             checkAmountOfProjects();
+            checkAmountOfFinishedProjects();
         }
 
         private void checkAmountOfProjects()
         {
             //If there are 0 projects, show error message
-            if (vm.Projects.Count == 0)
+            if (vm.ProjectsInProgress.Count == 0)
             {
                 ErrorMessage.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ErrorMessage.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void checkAmountOfFinishedProjects()
+        {
+            //If there are 0 finished projects, show error message
+            if (vm.ProjectsFinished.Count == 0)
+            {
+                ErrorMessageFinished.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ErrorMessageFinished.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void toggleFinished(object sender, RoutedEventArgs e)
+        {
+            //Get the project
+            Project project = (Project)((MenuItem)sender).DataContext;
+
+            //Mark the project as finished
+            vm.toggleFinished(project);
+
+            if (project.finished)
+            {
+                checkAmountOfFinishedProjects();
+                checkAmountOfProjects();
+            }
+            else
+            {
+                checkAmountOfProjects();
+                checkAmountOfFinishedProjects();
             }
         }
     }

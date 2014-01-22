@@ -20,7 +20,7 @@ namespace Project_Timer.Model
 
         public DateTime? deadline { get; set; }
 
-        public int status_id { get; set; }
+        public Boolean finished { get; set; }
 
         public override string ToString()
         {
@@ -39,7 +39,7 @@ namespace Project_Timer.Model
 
         public int project_id { get; set; }
 
-        public int status_id { get; set; }
+        public Boolean finished { get; set; }
 
         public override string ToString()
         {
@@ -66,16 +66,16 @@ namespace Project_Timer.Model
         }
     }
 
-    public sealed class Status
-    {
-        [PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+    //public sealed class Status
+    //{
+    //    [PrimaryKey, AutoIncrement]
+    //    public int id { get; set; }
 
-        public string name { get; set; }
+    //    public string name { get; set; }
 
-        public override string ToString()
-        {
-            return name;
-        }
-    }
+    //    public override string ToString()
+    //    {
+    //        return name;
+    //    }
+    //}
 }

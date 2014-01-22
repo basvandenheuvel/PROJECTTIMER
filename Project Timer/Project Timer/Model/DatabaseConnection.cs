@@ -23,29 +23,24 @@ namespace Project_Timer.Model
             conn.CreateTable<Project>();
             conn.CreateTable<Task>();
             conn.CreateTable<Worktime>();
-            conn.CreateTable<Status>();
         }
 
+        //TODO: delete before upload
         public static void fillStatusTable()
         {
             //Add the default statuses
-            if (conn.Table<Status>().Count() == 0)
+            if (conn.Table<Project>().Count() == 0)
             {
-                conn.Insert(new Status() { name = "In progress" });
-                conn.Insert(new Status() { name = "On hold" });
-                conn.Insert(new Status() { name = "Done" });
-                conn.Insert(new Status() { name = "Canceled" });
-
                 conn.Insert(new Task() { name = "Back-end maken", description = "Zorgen dat nieuwe boeken kunnen worden toegevoegd", project_id = 1 });
                 conn.Insert(new Task() { name = "Beginscherm maken", description = "De 10 goedkoopste boeken laten zien", project_id = 1 });
 
-                conn.Insert(new Project() { name = "Webshop", description = "Voor het vak PHP een webshop maken.", deadline = new DateTime(2014, 05, 05) });
+                conn.Insert(new Project() { name = "Webshop", description = "Voor het vak PHP een webshop maken.", deadline = new DateTime(2014, 05, 05), finished = false });
             }
         }
 
-        public static void emptyDatabase(bool areYouShure)
+        public static void emptyDatabase(bool areYouSure)
         {
-            if (areYouShure)
+            if (areYouSure)
             {
                 conn.DeleteAll<Worktime>();
                 conn.DeleteAll<Task>();

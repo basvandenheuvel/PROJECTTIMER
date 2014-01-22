@@ -44,21 +44,22 @@
         </Grid.DataContext>
         
         <!--Pivot Control-->
-        <phone:Pivot Title="Project Timer">
+        <phone:Pivot Title="Project Timer" x:Name="mainPivot">
             <!--Pivot item one-->
             <phone:PivotItem Header="Projects">
                 <Grid>
                     <!--Message when there are no proejcts to show-->
                     <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="There are no projects." Height="50" Margin="15,0,150,481" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
 
-                    <phone:LongListSelector x:Name="listLong" Margin="-12,0,0,0" ItemsSource="{Binding Projects}">
+                    <phone:LongListSelector x:Name="listLong" Margin="-12,0,0,0" ItemsSource="{Binding ProjectsInProgress}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
 
                                 <Grid Margin="15,0,0,0" Tap="projectClicked" >                                    
                                     <toolkit:ContextMenuService.ContextMenu>
                                         <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
-                                            <toolkit:MenuItem x:Name="Delete" Header="delete project" Click="deleteProjectClicked"  />
+                                            <toolkit:MenuItem x:Name="Finished" Header="mark as finished" Click="toggleFinished" />
+                                            <toolkit:MenuItem x:Name="Delete" Header="delete project" Click="deleteProjectClicked" />
                                         </toolkit:ContextMenu>
                                     </toolkit:ContextMenuService.ContextMenu>
 
@@ -76,7 +77,6 @@
                                     <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                                     <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding description}" TextWrapping="Wrap" MaxHeight="30" Margin="15,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                                     <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Text="{Binding deadline, StringFormat='Deadline: {0}'}" MaxHeight="30" TextWrapping="Wrap" Margin="15,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
-                                    <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Grid.Column="2" Text="{Binding ProjectTasks, StringFormat='{}{0} tasks'}" TextWrapping="Wrap" Margin="15,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
                                 </Grid>
                                 
                             </DataTemplate>
@@ -89,12 +89,49 @@
             <!--Pivot item two-->
             <phone:PivotItem Header="Finished">
 
-                <Button Grid.ColumnSpan="2" Grid.Row="0" Content="klik me" Command="{Binding AboutButtonCommand}"/>
+                <Grid>
+                    <!--Message when there are no proejcts to show-->
+                    <TextBlock x:Name="ErrorMessageFinished" Visibility="Collapsed" Text="There are no finished projects." Height="50" Margin="15,0,0,481" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
 
+                    <phone:LongListSelector x:Name="listLongFinished" Margin="-12,0,0,0" ItemsSource="{Binding ProjectsFinished}">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid Margin="15,0,0,0" Tap="projectClicked" >
+                                    <toolkit:ContextMenuService.ContextMenu>
+                                        <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
+                                            <toolkit:MenuItem x:Name="Finished" Header="mark as unfinished" Click="toggleFinished" />
+                                            <toolkit:MenuItem x:Name="Delete" Header="delete finished project" Click="deleteProjectClicked" />
+                                        </toolkit:ContextMenu>
+                                    </toolkit:ContextMenuService.ContextMenu>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="225"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Visibility="Collapsed" Text="{Binding id}" />
+                                    <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding description}" TextWrapping="Wrap" MaxHeight="30" Margin="15,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <TextBlock Grid.ColumnSpan="1" Grid.Row="2" Text="{Binding deadline, StringFormat='Deadline: {0}'}" MaxHeight="30" TextWrapping="Wrap" Margin="15,-6,12,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                </Grid>
+
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+
+                </Grid>
+                
             </phone:PivotItem>
         </phone:Pivot>
 
     </Grid>
+
 
     <!--ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>

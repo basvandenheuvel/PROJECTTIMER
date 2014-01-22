@@ -12,8 +12,6 @@ namespace Project_Timer.ViewModel
 {
     public class AddProjectPageViewModel
     {
-        private static int DEFAULT_STATUS_ID = 1;
-
         public void saveProject(String name, String description, String client, DateTime? deadline)
         {
             //Saving not allowed; Name and description must be filled in
@@ -25,13 +23,13 @@ namespace Project_Timer.ViewModel
 
             //Saving allowed; Default status is 'In progress'
 
+            //Create a new project
+            Project newProject = new Project() { name = name, description = description, client = client, deadline = deadline, finished = false };
             //Save the new project
-            DatabaseConnection.conn.Insert(new Project() { name = name, description = description, client = client, deadline = deadline, status_id = DEFAULT_STATUS_ID });
+            DatabaseConnection.conn.Insert(newProject);
 
             //Redirect to the project page of the new project
-            //Vergeet GET (ID) niet, en maar 1 removebackentry wanneer projectpage gebruikt word
-            App.RootFrame.Navigate(new Uri("/View/ProjectsPage.xaml", UriKind.RelativeOrAbsolute));
-            App.RootFrame.RemoveBackEntry();
+            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id=" + newProject.id, UriKind.RelativeOrAbsolute));
             App.RootFrame.RemoveBackEntry();
         }
     }

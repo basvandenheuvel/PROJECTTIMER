@@ -12,8 +12,10 @@ namespace Project_Timer.ViewModel
 {
     public class ProjectsPageViewModel 
     {
-        //Collection of projects
-        private ObservableCollection<Project> projects;
+        //Collection of projects in progress
+        private ObservableCollection<Project> projectsInProgress;
+        //Collection of projects that are finished
+        private ObservableCollection<Project> projectsFinished;
 
         //Commands
         private DelegateCommand aboutButtonCommand;
@@ -21,18 +23,28 @@ namespace Project_Timer.ViewModel
 
         public ProjectsPageViewModel()
         {
-            projects = new ObservableCollection<Project>();
+            projectsInProgress = new ObservableCollection<Project>();
+            projectsFinished = new ObservableCollection<Project>();
 
             createCommands();
         }
 
         public void refreshProjects()
         {
-            Projects.Clear();
+            //Projects in progress
+            ProjectsInProgress.Clear();
 
-            foreach (var s in DatabaseConnection.conn.Table<Project>())
+            foreach (var s in DatabaseConnection.conn.Query<Project>("SELECT * FROM Project WHERE finished = 0"))
             {
-                Projects.Add(s);
+                ProjectsInProgress.Add(s);
+            }
+
+            //Finished projects
+            ProjectsFinished.Clear();
+
+            foreach (var s in DatabaseConnection.conn.Query<Project>("SELECT * FROM Project WHERE finished = 1"))
+            {
+                ProjectsFinished.Add(s);
             }
         }
 
@@ -55,13 +67,50 @@ namespace Project_Timer.ViewModel
                                                     "FROM Project " +
                                                     "WHERE id = " + project.id);
 
-            Projects.Remove(project);
+            if (project.finished)
+            {
+                ProjectsFinished.Remove(project);
+            }
+            else
+            {
+                ProjectsInProgress.Remove(project);
+            }
+        }
+
+        public void toggleFinished(Project project)
+        {
+            if (project.finished)
+            {
+                //Set the project to in progress
+                DatabaseConnection.conn.Query<Project>("UPDATE Project SET finished = 0 WHERE id =" + project.id);
+
+                project.finished = false;
+
+                //Place the project in the other collection
+                ProjectsFinished.Remove(project);
+                ProjectsInProgress.Add(project);
+            }
+            else
+            {
+                //Set the project to finished
+                DatabaseConnection.conn.Query<Project>("UPDATE Project SET finished = 1 WHERE id =" + project.id);
+
+                project.finished = true;
+
+                //Place the project in the other collection
+                ProjectsInProgress.Remove(project);
+                ProjectsFinished.Add(project);
+            }
         }
 
         #region properties
-        public ObservableCollection<Project> Projects
+        public ObservableCollection<Project> ProjectsInProgress
         {
-            get { return projects; }
+            get { return projectsInProgress; }
+        }
+        public ObservableCollection<Project> ProjectsFinished
+        {
+            get { return projectsFinished; }
         }
         #endregion
 

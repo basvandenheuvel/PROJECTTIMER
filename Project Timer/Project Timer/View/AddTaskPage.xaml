@@ -60,7 +60,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="105" />
                     <RowDefinition Height="175" />
-                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Name*" Grid.Row="0" Margin="12,6,0,0" />
@@ -68,10 +67,6 @@
 
                 <TextBlock Text="Description" Grid.Row="1" Margin="12,6,0,0" />
                 <toolkit:PhoneTextBox Name="txt_Description"  Margin="0,30,0,0" InputScope="Text" Height="140" Grid.Row="1" Padding="10,0,0,0" AcceptsReturn="True" TextWrapping="Wrap"/>
-
-                <TextBlock Text="Status" Grid.Row="2" Margin="12,6,0,0" />
-                <!--<toolkit:PhoneTextBox Name="txt_Status"  Margin="0,30,0,0" InputScope="Text" Padding="10,0,0,0" Grid.Row="2" BorderThickness="0" Height="70" MaxLength="45" />-->
-                <toolkit:ListPicker x:Name="lis_Status" Grid.Row="2" Margin="12,30,0,0" Padding="10,0,0,0" ItemsSource="{Binding Statuses}" />
 
             </Grid>
         </Grid>
