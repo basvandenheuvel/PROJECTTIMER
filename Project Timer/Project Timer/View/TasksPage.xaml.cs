@@ -42,17 +42,6 @@ namespace Project_Timer.View
             }
         }
 
-        private void refreshTasks()
-        {
-            vm.refreshTasks();
-
-            //If there are 0 projects, show error message
-            if (vm.Tasks.Count == 0)
-            {
-                ErrorMessage.Visibility = Visibility.Visible;
-            }
-        }
-
         private void AddTaskClicked(object sender, EventArgs e)
         {
             App.RootFrame.Navigate(new Uri("/View/AddTaskPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
@@ -70,6 +59,24 @@ namespace Project_Timer.View
             {
                 //Delete project
                 vm.deleteTask(task);
+
+                checkAmountOfTasks();
+            }
+        }
+        
+        private void refreshTasks()
+        {
+            vm.refreshTasks();
+
+            checkAmountOfTasks();
+        }
+
+        private void checkAmountOfTasks()
+        {
+            //If there are 0 projects, show error message
+            if (vm.Tasks.Count == 0)
+            {
+                ErrorMessage.Visibility = Visibility.Visible;
             }
         }
     }

@@ -62,6 +62,8 @@ namespace Project_Timer
             {
                 //Delete project
                 vm.deleteProject(project);
+
+                checkAmountOfProjects();
             }
         }
 
@@ -78,6 +80,11 @@ namespace Project_Timer
         {
             vm.refreshProjects();
 
+            checkAmountOfProjects();
+        }
+
+        private void checkAmountOfProjects()
+        {
             //If there are 0 projects, show error message
             if (vm.Projects.Count == 0)
             {

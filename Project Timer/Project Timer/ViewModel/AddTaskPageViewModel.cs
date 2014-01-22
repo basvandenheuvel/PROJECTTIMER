@@ -13,6 +13,8 @@ namespace Project_Timer.ViewModel
     {
         private ObservableCollection<Status> statuses = new ObservableCollection<Status>();
 
+        private String projectName = "TEMP_NAME -> uit DB graag"; 
+
         public AddTaskPageViewModel()
         {
             //Add all statuses to the observable collection
@@ -51,6 +53,10 @@ namespace Project_Timer.ViewModel
         public ObservableCollection<Status> Statuses
         {
             get { return statuses; }
+        }
+        public String ProjectName
+        {
+            get { return projectName; }
         }
         #endregion
     }
