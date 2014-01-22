@@ -88,7 +88,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="edit project" />
+                <shell:ApplicationBarMenuItem Text="edit project" Click="editProjectClicked"  />
             </shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton Text="new task" Click="AddTaskClicked" IconUri="/Toolkit.Content/ApplicationBar.Add.png"/>
         </shell:ApplicationBar>

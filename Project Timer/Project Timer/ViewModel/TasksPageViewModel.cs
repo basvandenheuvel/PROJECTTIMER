@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using System.Windows;
 
 namespace Project_Timer.ViewModel
 {
-    public class TasksPageViewModel
+    public class TasksPageViewModel : INotifyPropertyChanged 
     {
         //Collection of tasks
         private ObservableCollection<Project_Timer.Model.Task> tasks;
@@ -57,13 +58,31 @@ namespace Project_Timer.ViewModel
         public String ProjectName
         {
             get { return projectName; }
+            set { 
+                    projectName = value;  
+                    OnPropertyChanged("ProjectName"); 
+                }
         }
         public int ProjectId
         {
             set { 
                     projectId = value;
-                    projectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
+                    ProjectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
                 }
+        }
+        #endregion
+
+        #region propertychanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Create the OnPropertyChanged method to raise the event 
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
         #endregion
     }

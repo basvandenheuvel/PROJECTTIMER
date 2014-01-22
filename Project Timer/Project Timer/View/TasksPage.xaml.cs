@@ -79,5 +79,10 @@ namespace Project_Timer.View
                 ErrorMessage.Visibility = Visibility.Visible;
             }
         }
+
+        private void editProjectClicked(object sender, EventArgs e)
+        {
+            App.RootFrame.Navigate(new Uri("/View/AddProjectPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
+        }
     }
 }
