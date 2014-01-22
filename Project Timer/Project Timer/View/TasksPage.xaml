@@ -115,7 +115,7 @@
                         <RowDefinition Height="85"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
+                
                     <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Wat leuke info laten zien :). Bijv... hoeveel uur per taak , grafiekje? export?" />
                 </Grid>
             </phone:PivotItem>
