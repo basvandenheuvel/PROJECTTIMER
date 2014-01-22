@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Project_Timer.ViewModel;
+using Project_Timer.Model;
 
 namespace Project_Timer.View
 {
@@ -55,6 +56,21 @@ namespace Project_Timer.View
         private void AddTaskClicked(object sender, EventArgs e)
         {
             App.RootFrame.Navigate(new Uri("/View/AddTaskPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
+        }
+
+        private void deleteTaskClicked(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            //Get the project
+            Task task = (Task)((MenuItem)sender).DataContext;
+
+            //Prompt the user if he/she is sure 
+            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the task " + task.name + "?", "Delete task?", MessageBoxButton.OKCancel);
+
+            if (mbr == MessageBoxResult.OK)
+            {
+                //Delete project
+                vm.deleteTask(task);
+            }
         }
     }
 }

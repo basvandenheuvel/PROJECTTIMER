@@ -57,7 +57,7 @@
                                 <Grid Margin="15,0,0,0" >
                                     <toolkit:ContextMenuService.ContextMenu>
                                         <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
-                                            <toolkit:MenuItem x:Name="Delete" Header="delete project" />
+                                            <toolkit:MenuItem x:Name="Delete" Header="delete task" Tap="deleteTaskClicked" />
                                         </toolkit:ContextMenu>
                                     </toolkit:ContextMenuService.ContextMenu>
 

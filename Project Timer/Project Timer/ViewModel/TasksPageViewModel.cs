@@ -32,6 +32,20 @@ namespace Project_Timer.ViewModel
             }
         }
 
+        public void deleteTask(Model.Task task)
+        {
+            //Delete all worktime belonging to the project
+            DatabaseConnection.conn.Query<Project>( "DELETE " +
+                                                    "FROM Worktime " +
+                                                    "WHERE task_id  = " + task.id);
+
+            //Delete all tasks belonging to the project
+            DatabaseConnection.conn.Query<Project>( "DELETE " +
+                                                    "FROM Task " +
+                                                    "WHERE id = " + task.id);
+            tasks.Remove(task);
+        }
+
         #region properties
         public ObservableCollection<Project_Timer.Model.Task> Tasks
         {
