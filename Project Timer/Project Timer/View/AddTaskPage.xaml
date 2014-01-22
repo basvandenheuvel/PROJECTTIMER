@@ -50,7 +50,7 @@
 
             <!--TitlePanel contains the name of the application and page title-->
             <StackPanel Grid.Row="0" Margin="12,17,0,28">
-                <TextBlock Text="NEW TASK" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock Text="{Binding ProjectName}" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <!--<TextBlock Text="add project" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
             </StackPanel>
 
@@ -71,7 +71,7 @@
                 <TextBlock Text="Status" Grid.Row="2" Margin="12,6,0,0" />
                 <!--<toolkit:PhoneTextBox Name="txt_Status"  Margin="0,30,0,0" InputScope="Text" Padding="10,0,0,0" Grid.Row="2" BorderThickness="0" Height="70" MaxLength="45" />-->
                 <toolkit:ListPicker x:Name="lis_Status" Grid.Row="2" Margin="12,30,0,0" Padding="10,0,0,0" ItemsSource="{Binding Statuses}" />
-                
+
             </Grid>
         </Grid>
     </ScrollViewer>

@@ -75,7 +75,7 @@ namespace Project_Timer.Model
 
         public override string ToString()
         {
-            return "Status: " + id + " - " + name;
+            return name;
         }
     }
 }

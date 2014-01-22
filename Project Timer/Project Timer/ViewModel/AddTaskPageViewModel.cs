@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Project_Timer.ViewModel
 {
@@ -26,26 +27,25 @@ namespace Project_Timer.ViewModel
             }
         }
 
-        //public void saveProject(String name, String description, String client, DateTime? deadline)
-        //{
-        //    //Saving not allowed; Name and description must be filled in
-        //    if (String.IsNullOrWhiteSpace(name) || String.IsNullOrWhiteSpace(description))
-        //    {
-        //        MessageBox.Show("Project can't be saved. The project 'name' and 'description' are required.");
-        //        return;
-        //    }
+        public void saveTask(String name, String description, int status_id, int project_id)
+        {
+            //Saving not allowed; Name and description must be filled in
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Task can't be saved. The task 'name' is required.");
+                return;
+            }
 
-        //    //Saving allowed; Default status is 'In progress'
+            //Saving allowed
 
-        //    //Save the new project
-        //    DatabaseConnection.conn.Insert(new Project() { name = name, description = description, client = client, deadline = deadline, status_id = DEFAULT_STATUS_ID });
+            //Save the new project
+            DatabaseConnection.conn.Insert(new Project_Timer.Model.Task() { name = name, description = description, status_id = status_id, project_id = project_id  });
 
-        //    //Redirect to the project page of the new project
-        //    //Vergeet GET (ID) niet, en maar 1 removebackentry wanneer projectpage gebruikt word
-        //    App.RootFrame.Navigate(new Uri("/View/ProjectsPage.xaml", UriKind.RelativeOrAbsolute));
-        //    App.RootFrame.RemoveBackEntry();
-        //    App.RootFrame.RemoveBackEntry();
-        //}
+            //Redirect to the project page of the new project
+            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ project_id, UriKind.RelativeOrAbsolute));
+            App.RootFrame.RemoveBackEntry();
+            App.RootFrame.RemoveBackEntry();
+        }
 
         #region properties
         public ObservableCollection<Status> Statuses
