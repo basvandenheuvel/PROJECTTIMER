@@ -43,5 +43,16 @@ namespace Project_Timer.Model
                 conn.Insert(new Project() { name = "2222", description = "22rrr" });
             }
         }
+
+        public static void emptyDatabase(bool areYouShure)
+        {
+            if (areYouShure)
+            {
+                conn.DeleteAll<Worktime>();
+                conn.DeleteAll<Task>();
+                conn.DeleteAll<Project>();
+                conn.DeleteAll<Status>();
+            }
+        }
     }
 }
