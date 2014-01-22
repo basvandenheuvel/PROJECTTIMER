@@ -17,16 +17,10 @@ namespace Project_Timer.ViewModel
         //Collection of projects that are finished
         private ObservableCollection<Project> projectsFinished;
 
-        //Commands
-        private DelegateCommand aboutButtonCommand;
-        private DelegateCommand settingsButtonCommand;
-
         public ProjectsPageViewModel()
         {
             projectsInProgress = new ObservableCollection<Project>();
             projectsFinished = new ObservableCollection<Project>();
-
-            createCommands();
         }
 
         public void refreshProjects()
@@ -113,36 +107,5 @@ namespace Project_Timer.ViewModel
             get { return projectsFinished; }
         }
         #endregion
-
-        #region ICommands
-        private void createCommands()
-        {
-            aboutButtonCommand = new DelegateCommand(aboutButton);
-            settingsButtonCommand = new DelegateCommand(settingsButton);
-        }
-
-        //ICommands
-        public ICommand AboutButtonCommand 
-        {
-            get { return aboutButtonCommand; } 
-        }
-
-        public ICommand SettingsButtonCommand 
-        {
-            get { return settingsButtonCommand; }  
-        }
-
-        //Methods used in ICommands
-        public void aboutButton()
-        {
-            MessageBox.Show("About clicked");
-        }
-
-        public void settingsButton()
-        {
-            MessageBox.Show("Settings clicked");
-        }
-        #endregion
-
     }
 }

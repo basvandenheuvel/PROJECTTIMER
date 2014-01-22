@@ -43,20 +43,21 @@
         </Grid.DataContext>
 
         <!--Pivot Control-->
-        <phone:Pivot Title="{Binding ProjectName}">
+        <phone:Pivot Title="{Binding ProjectName}" x:Name="mainPivot">
             <!--Pivot item one-->
             <phone:PivotItem Header="Tasks">
                 <Grid>
                     <!--Message when there are no proejcts to show-->
-                    <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="There are no tasks." Height="50" Margin="15,0,150,481" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+                    <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" VerticalAlignment="Top" Text="There are no tasks." Height="50" Margin="15,0,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
 
                     <phone:LongListSelector Margin="-12,0,0,0" ItemsSource="{Binding Tasks}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
 
-                                <Grid Margin="15,0,0,0" >
+                                <Grid Margin="15,0,0,0" Tap="taskClicked" >
                                     <toolkit:ContextMenuService.ContextMenu>
                                         <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
+                                            <toolkit:MenuItem x:Name="Finished" Header="mark as finished" Tap="toggleFinished" />
                                             <toolkit:MenuItem x:Name="Delete" Header="delete task" Tap="deleteTaskClicked" />
                                         </toolkit:ContextMenu>
                                     </toolkit:ContextMenuService.ContextMenu>
@@ -66,7 +67,6 @@
                                         <RowDefinition Height="30"/>
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Visibility="Collapsed" Text="{Binding id}" />
                                     <TextBlock Grid.Row="0" Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                                     <TextBlock Grid.Row="1" Text="{Binding description}" TextWrapping="Wrap" MaxHeight="30" Margin="15,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                                 </Grid>
@@ -77,9 +77,49 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="iets anders">
+            <phone:PivotItem Header="finished">
+                <Grid>
+                    <!--Message when there are no proejcts to show-->
+                    <TextBlock x:Name="ErrorMessageFinished" Visibility="Collapsed" VerticalAlignment="Top" Text="There are no finished tasks." Height="50" Margin="15,0,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
 
+                    <phone:LongListSelector Margin="-12,0,0,0" ItemsSource="{Binding FinishedTasks}">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid Margin="15,0,0,0" Tap="taskClicked" >
+                                    <toolkit:ContextMenuService.ContextMenu>
+                                        <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
+                                            <toolkit:MenuItem x:Name="Finished" Header="mark as unfinished" Tap="toggleFinished" />
+                                            <toolkit:MenuItem x:Name="Delete" Header="delete task" Tap="deleteTaskClicked" />
+                                        </toolkit:ContextMenu>
+                                    </toolkit:ContextMenuService.ContextMenu>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Grid.Row="1" Text="{Binding description}" TextWrapping="Wrap" MaxHeight="30" Margin="15,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </Grid>
             </phone:PivotItem>
+
+            <!--Pivot item three-->
+            <phone:PivotItem Header="Statistics">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="85"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Wat leuke info laten zien :). Bijv... hoeveel uur per taak , grafiekje? export?" />
+                </Grid>
+            </phone:PivotItem>
+
         </phone:Pivot>
 
     </Grid>

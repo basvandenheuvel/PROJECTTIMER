@@ -128,16 +128,8 @@ namespace Project_Timer
             //Mark the project as finished
             vm.toggleFinished(project);
 
-            if (project.finished)
-            {
-                checkAmountOfFinishedProjects();
-                checkAmountOfProjects();
-            }
-            else
-            {
-                checkAmountOfProjects();
-                checkAmountOfFinishedProjects();
-            }
+            checkAmountOfFinishedProjects();
+            checkAmountOfProjects();
         }
     }
 }

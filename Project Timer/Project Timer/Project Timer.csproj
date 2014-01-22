@@ -95,7 +95,6 @@
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\DatabaseConnection.cs" />
-    <Compile Include="Model\DelegateCommand.cs" />
     <Compile Include="Model\Tables.cs" />
     <Compile Include="Model\Projects.cs" />
     <Compile Include="SQLite.cs" />

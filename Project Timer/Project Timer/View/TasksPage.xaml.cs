@@ -39,6 +39,9 @@ namespace Project_Timer.View
 
                 //Refresh the tasks
                 refreshTasks();
+
+                //Set default pivot page
+                mainPivot.SelectedIndex = 0;
             }
         }
 
@@ -60,7 +63,14 @@ namespace Project_Timer.View
                 //Delete project
                 vm.deleteTask(task);
 
-                checkAmountOfTasks();
+                if (task.finished)
+                {
+                    checkAmountOfFinishedTasks();
+                }
+                else
+                {
+                    checkAmountOfTasks();
+                }
             }
         }
         
@@ -69,20 +79,55 @@ namespace Project_Timer.View
             vm.refreshTasks();
 
             checkAmountOfTasks();
+            checkAmountOfFinishedTasks();
         }
 
         private void checkAmountOfTasks()
         {
-            //If there are 0 projects, show error message
+            //If there are 0 tasks, show error message
             if (vm.Tasks.Count == 0)
             {
                 ErrorMessage.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ErrorMessage.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void checkAmountOfFinishedTasks()
+        {
+            //If there are 0 tasks, show error message
+            if (vm.FinishedTasks.Count == 0)
+            {
+                ErrorMessageFinished.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ErrorMessageFinished.Visibility = Visibility.Collapsed;
             }
         }
 
         private void editProjectClicked(object sender, EventArgs e)
         {
             App.RootFrame.Navigate(new Uri("/View/AddProjectPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
+        }
+
+        private void taskClicked(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            //Navigate to worktime view... daar controleren we of het PROJECT op finished staat, dan mag er NIKS worden toegevoegd
+        }
+
+        private void toggleFinished(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            //Get the task
+            Task task = (Task)((MenuItem)sender).DataContext;
+
+            //Mark the project as finished
+            vm.toggleFinished(task);
+
+            checkAmountOfFinishedTasks();
+            checkAmountOfTasks();
         }
     }
 }
