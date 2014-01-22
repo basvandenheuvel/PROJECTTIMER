@@ -15,6 +15,7 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
+    <!--TransitionService to animate the navigation-->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
