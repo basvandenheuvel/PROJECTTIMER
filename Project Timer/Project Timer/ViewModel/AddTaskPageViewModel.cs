@@ -13,7 +13,11 @@ namespace Project_Timer.ViewModel
     {
         private ObservableCollection<Status> statuses = new ObservableCollection<Status>();
 
-        private String projectName = "TEMP_NAME -> uit DB graag"; 
+        //Default project name
+        private String projectName = "Project Timer";
+
+        //Project id
+        private int projectId;
 
         public AddTaskPageViewModel()
         {
@@ -57,6 +61,14 @@ namespace Project_Timer.ViewModel
         public String ProjectName
         {
             get { return projectName; }
+        }
+        public int ProjectId
+        {
+            get { return projectId; }
+            set { 
+                    projectId = value;
+                    projectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
+                }
         }
         #endregion
     }

@@ -14,12 +14,18 @@ namespace Project_Timer.View
 {
     public partial class AddTaskPage : PhoneApplicationPage
     {
+        //ViewModel
+        private AddTaskPageViewModel vm;
+
         //Project id
         private int projectId;
 
         public AddTaskPage()
         {
             InitializeComponent();
+
+            //Get the viewmodel
+            vm = (AddTaskPageViewModel)LayoutRoot.DataContext;
         }
 
         //Method triggerd when navigated to this page
@@ -28,14 +34,13 @@ namespace Project_Timer.View
             if (NavigationContext.QueryString.ContainsKey("id"))
             {
                 projectId = Int32.Parse(NavigationContext.QueryString["id"]);
+
+                vm.ProjectId = projectId;
             }
         }
 
         private void saveButtonClicked(object sender, EventArgs e)
         {
-            //Get the viewmodel
-            AddTaskPageViewModel vm = (AddTaskPageViewModel)LayoutRoot.DataContext;
-
             //Call the save method in the viewModel
             vm.saveTask(txt_Name.Text, txt_Description.Text, ((Status)lis_Status.SelectedItem).id, projectId);
         }

@@ -14,6 +14,9 @@ namespace Project_Timer.ViewModel
         //Collection of tasks
         private ObservableCollection<Project_Timer.Model.Task> tasks;
 
+        //Default project name
+        private String projectName = "Project Timer";
+
         //Project id
         private int projectId;
 
@@ -51,10 +54,16 @@ namespace Project_Timer.ViewModel
         {
             get { return tasks; }
         }
-
+        public String ProjectName
+        {
+            get { return projectName; }
+        }
         public int ProjectId
         {
-            set { projectId = value; }
+            set { 
+                    projectId = value;
+                    projectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
+                }
         }
         #endregion
     }

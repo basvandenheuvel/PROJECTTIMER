@@ -42,7 +42,7 @@
         <Grid.DataContext>
             <vm:ProjectsPageViewModel/>
         </Grid.DataContext>
-
+        
         <!--Pivot Control-->
         <phone:Pivot Title="Project Timer">
             <!--Pivot item one-->
