@@ -13,13 +13,19 @@ namespace Project_Timer.ViewModel
     public class TasksPageViewModel : INotifyPropertyChanged 
     {
         //Collection of tasks
-        private ObservableCollection<Project_Timer.Model.Task> tasks;
-        
+        private ObservableCollection<Project_Timer.Model.Task> tasks;        
         //Collection of finished tasks
         private ObservableCollection<Project_Timer.Model.Task> finishedTasks;
 
         //Default project name
         private String projectName = "Project Timer";
+
+        //Amount of tasks a project has
+        private int amountOfTasks;
+        //Amount of finished tasks a project has
+        private int amountOfFinishedTasks;
+        //Total hours spend on this project
+        private double totalHours = 12.5;
 
         //Project id
         private int projectId;
@@ -35,9 +41,10 @@ namespace Project_Timer.ViewModel
             //Tasks in progress
             tasks.Clear();
 
-            foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.Task>("SELECT * FROM Task WHERE project_id = " + projectId))
+            foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.Task>("SELECT * FROM Task WHERE project_id = " + projectId + " AND finished = 0"))
             {
                 tasks.Add(t);
+                AmountOfTasks++;
             }
 
             //Finished tasks
@@ -46,11 +53,13 @@ namespace Project_Timer.ViewModel
             foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.Task>("SELECT * FROM Task WHERE project_id = " + projectId + " AND finished = 1"))
             {
                 finishedTasks.Add(t);
+                AmountOfFinishedTasks++;
             }
         }
 
         public void deleteTask(Model.Task task)
         {
+            MessageBox.Show("delete: " + task.id);
             //TODO: testen!!!!
 
             //Delete all worktime belonging to the project
@@ -66,10 +75,12 @@ namespace Project_Timer.ViewModel
             if (task.finished)
             {
                 finishedTasks.Remove(task);
+                AmountOfFinishedTasks--;
             }
             else
             {
                 tasks.Remove(task);
+                AmountOfTasks--;
             }
         }
 
@@ -85,6 +96,9 @@ namespace Project_Timer.ViewModel
                 //Place the task in the other collection
                 FinishedTasks.Remove(task);
                 Tasks.Add(task);
+
+                AmountOfTasks++;
+                AmountOfFinishedTasks--;
             }
             else
             {
@@ -96,6 +110,9 @@ namespace Project_Timer.ViewModel
                 //Place the project in the other collection
                 Tasks.Remove(task);
                 FinishedTasks.Add(task);
+
+                AmountOfTasks--;
+                AmountOfFinishedTasks++;
             }
         }
 
@@ -107,6 +124,32 @@ namespace Project_Timer.ViewModel
         public ObservableCollection<Project_Timer.Model.Task> FinishedTasks
         {
             get { return finishedTasks; }
+        }
+        public int AmountOfTasks
+        {
+            get { return amountOfTasks; }
+            set {
+                    amountOfTasks = value;
+                    OnPropertyChanged("AmountOfTasks"); 
+                }
+        }
+        public int AmountOfFinishedTasks
+        {
+            get { return amountOfFinishedTasks; }
+            set
+            {
+                amountOfFinishedTasks = value;
+                OnPropertyChanged("AmountOfFinishedTasks");
+            }
+        }
+        public double TotalHours
+        {
+            get { return totalHours; }
+            set
+            {
+                totalHours = value;
+                OnPropertyChanged("TotalHours");
+            }
         }
         public String ProjectName
         {
