@@ -36,7 +36,7 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.DataContext>
@@ -118,21 +118,28 @@
                             <RowDefinition Height="45"/>
                             <RowDefinition Height="55"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="25"/>
                         </Grid.RowDefinitions>
-                
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+
                         <!--Amount of tasks in progress-->
-                        <TextBlock Grid.Row="0" Text="Amount of tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                        <TextBlock Grid.Row="0" Text="{Binding AmountOfTasks}" Margin="325,0,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Amount of tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding AmountOfTasks}" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
                         <!--Amount of finished tasks in progress-->
-                        <TextBlock Grid.Row="1" Text="Amount of finished tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                        <TextBlock Grid.Row="1" Text="{Binding AmountOfFinishedTasks}" Margin="325,0,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Amount of finished tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding AmountOfFinishedTasks}" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
                         <!--Hours spend on this project-->
-                        <TextBlock Grid.Row="2" Text="Total hours" Margin="0,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                        <TextBlock Grid.Row="2" Text="{Binding TotalHours}" Margin="325,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Total hours" Margin="0,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding TotalHours}" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
-                        <sparrow:SparrowChart Grid.Row="3" Margin="0,10,10,0" MinHeight="300" MinWidth="300">
+                        <!-- chart -->
+                        <sparrow:SparrowChart Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,10,10,-10">
                             <sparrow:SparrowChart.XAxis>
                                 <sparrow:LinearXAxis/>
                             </sparrow:SparrowChart.XAxis>
@@ -151,6 +158,15 @@
                             </sparrow:LineSeries>
                         </sparrow:SparrowChart>
 
+                        <!-- Chart labels -->
+                        <TextBlock Grid.Row="3" Text="Hours" Margin="0,0,-150,40" Height="25" FontSize="{StaticResource PhoneFontSizeSmall}" VerticalAlignment="Bottom">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="-90"/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="Week number" Margin="80,-5,0,5" FontSize="{StaticResource PhoneFontSizeSmall}"/>
                     </Grid>
                 </ScrollViewer>
             </phone:PivotItem>
