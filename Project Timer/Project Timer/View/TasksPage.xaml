@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:vm="clr-namespace:Project_Timer.ViewModel"
-    xmlns:sparrow="clr-namespace:Sparrow.BulletGraph;assembly=Sparrow.BulletGraph.WP8.45"
+    xmlns:sparrow="clr-namespace:Sparrow.Chart;assembly=Sparrow.Chart.WP8.45"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -111,28 +111,48 @@
 
             <!--Pivot item three-->
             <phone:PivotItem Header="Statistics">
-                <Grid Margin="12,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <ScrollViewer>
+                    <Grid Margin="12,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                 
-                    <!--Amount of tasks in progress-->
-                    <TextBlock Grid.Row="0" Text="Amount of tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                    <TextBlock Grid.Row="0" Text="{Binding AmountOfTasks}" Margin="325,0,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <!--Amount of tasks in progress-->
+                        <TextBlock Grid.Row="0" Text="Amount of tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="0" Text="{Binding AmountOfTasks}" Margin="325,0,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
-                    <!--Amount of finished tasks in progress-->
-                    <TextBlock Grid.Row="1" Text="Amount of finished tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                    <TextBlock Grid.Row="1" Text="{Binding AmountOfFinishedTasks}" Margin="325,0,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <!--Amount of finished tasks in progress-->
+                        <TextBlock Grid.Row="1" Text="Amount of finished tasks" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="1" Text="{Binding AmountOfFinishedTasks}" Margin="325,0,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
-                    <!--Hours spend on this project-->
-                    <TextBlock Grid.Row="2" Text="Total hours" Margin="0,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                    <TextBlock Grid.Row="2" Text="{Binding TotalHours}" Margin="325,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                                        
+                        <!--Hours spend on this project-->
+                        <TextBlock Grid.Row="2" Text="Total hours" Margin="0,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <TextBlock Grid.Row="2" Text="{Binding TotalHours}" Margin="325,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
-                </Grid>
+                        <sparrow:SparrowChart Grid.Row="3" Margin="0,10,10,0" MinHeight="300" MinWidth="300">
+                            <sparrow:SparrowChart.XAxis>
+                                <sparrow:LinearXAxis/>
+                            </sparrow:SparrowChart.XAxis>
+                            <sparrow:SparrowChart.YAxis>
+                                <sparrow:LinearYAxis/>
+                            </sparrow:SparrowChart.YAxis>
+                            <sparrow:LineSeries>
+                                <sparrow:LineSeries.Points>
+                                    <sparrow:DoublePoint Data="44" Value="3"/>
+                                    <sparrow:DoublePoint Data="45" Value="7"/>
+                                    <sparrow:DoublePoint Data="46" Value="1"/>
+                                    <sparrow:DoublePoint Data="47" Value="0"/>
+                                    <sparrow:DoublePoint Data="48" Value="12"/>
+                                    <sparrow:DoublePoint Data="49" Value="9"/>
+                                </sparrow:LineSeries.Points>
+                            </sparrow:LineSeries>
+                        </sparrow:SparrowChart>
+
+                    </Grid>
+                </ScrollViewer>
             </phone:PivotItem>
 
         </phone:Pivot>
