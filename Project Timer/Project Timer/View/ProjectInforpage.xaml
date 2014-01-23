@@ -16,7 +16,8 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <ScrollViewer VerticalScrollBarVisibility="auto">
+        <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.DataContext>
             <vm:ProjectInfoPageViewModel/>
         </Grid.DataContext>
@@ -32,8 +33,7 @@
          </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <ScrollViewer VerticalScrollBarVisibility="auto">
-            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,66,12,0">
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -50,17 +50,18 @@
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Description" Margin="12,0,0,0" FontWeight="Bold"   />
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2"  Margin="12,40,0,27" TextWrapping="Wrap" Text="{Binding Description}" />
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Client" Margin="12,0,0,0" FontWeight="Bold"   />
-                <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Client}" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Client" Margin="12,0,0,0" FontWeight="Bold"  />
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Client, TargetNullValue='-'}" />
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Deadline" Margin="12,0,0,0" FontWeight="Bold"   />
-                <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Deadline}" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Deadline, TargetNullValue='-'}" />
 
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Status" Margin="12,0,0,0" FontWeight="Bold"   />
                 <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Status}" />
 
             </Grid>
-        </ScrollViewer>
     </Grid>
+
+    </ScrollViewer>
 
 </phone:PhoneApplicationPage>
