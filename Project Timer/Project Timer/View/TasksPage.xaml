@@ -130,7 +130,6 @@
                     <TextBlock Grid.Row="2" Text="Total hours" Margin="0,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
                     <TextBlock Grid.Row="2" Text="{Binding TotalHours}" Margin="325,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
-                    
                 </Grid>
             </phone:PivotItem>
 
