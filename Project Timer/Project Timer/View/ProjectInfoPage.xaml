@@ -16,7 +16,7 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <ScrollViewer VerticalScrollBarVisibility="auto">
+    <ScrollViewer>
         <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.DataContext>
             <vm:ProjectInfoPageViewModel/>
