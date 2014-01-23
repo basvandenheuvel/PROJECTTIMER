@@ -11,7 +11,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
@@ -28,11 +28,11 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="PROJECT NAAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextNormalStyle}"/>
          </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="auto">
             <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,66,12,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -48,16 +48,16 @@
                 </Grid.ColumnDefinitions>
             
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Description" Margin="12,0,0,0" FontWeight="Bold"   />
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2"  Margin="12,40,0,27" TextWrapping="Wrap" Text="Omschrijving.. moet nog worden gebind deze kan lang zijn hoor.. maar wrod dan gewoon op een volgende regel gezet" />
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2"  Margin="12,40,0,27" TextWrapping="Wrap" Text="{Binding Description}" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Client" Margin="12,0,0,0" FontWeight="Bold"   />
-                <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="Avans" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Client}" />
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Deadline" Margin="12,0,0,0" FontWeight="Bold"   />
-                <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="01-06-2014" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Deadline}" />
 
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Status" Margin="12,0,0,0" FontWeight="Bold"   />
-                <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="In progress" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,0,0,18" TextWrapping="Wrap" Text="{Binding Status}" />
 
             </Grid>
         </ScrollViewer>

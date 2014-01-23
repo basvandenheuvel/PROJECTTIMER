@@ -135,7 +135,8 @@ namespace Project_Timer.View
 
         private void projectInfoClicked(object sender, EventArgs e)
         {
-            //Show project info page... NOT AN EDIT PAGE!!
+            //Show project info page.
+            App.RootFrame.Navigate(new Uri("/View/ProjectInforPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
         }
     }
 }
