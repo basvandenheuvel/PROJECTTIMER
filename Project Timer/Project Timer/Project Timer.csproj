@@ -101,6 +101,7 @@
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="ViewModel\AddProjectPageViewModel.cs" />
     <Compile Include="ViewModel\AddTaskPageViewModel.cs" />
+    <Compile Include="ViewModel\ProjectInfoPageViewModel.cs" />
     <Compile Include="ViewModel\ProjectsPageViewModel.cs" />
     <Compile Include="ViewModel\TasksPageViewModel.cs" />
     <Compile Include="ViewModel\WorktimePageViewModel.cs" />
@@ -112,6 +113,9 @@
     </Compile>
     <Compile Include="View\AddTaskPage.xaml.cs">
       <DependentUpon>AddTaskPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectInforpage.xaml.cs">
+      <DependentUpon>ProjectInforpage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProjectsPage.xaml.cs">
       <DependentUpon>ProjectsPage.xaml</DependentUpon>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddTaskPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProjectInforpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
