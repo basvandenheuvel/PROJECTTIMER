@@ -166,6 +166,7 @@
                 <shell:ApplicationBarMenuItem Text="edit project" Click="editProjectClicked"  />
             </shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton Text="new task" Click="AddTaskClicked" IconUri="/Toolkit.Content/ApplicationBar.Add.png"/>
+            <shell:ApplicationBarIconButton Text="project info"  IconUri="/Assets/AppBar/questionmark.png" Click="projectInfoClicked" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

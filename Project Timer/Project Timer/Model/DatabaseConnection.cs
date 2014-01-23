@@ -31,6 +31,9 @@ namespace Project_Timer.Model
             //Add the default statuses
             if (conn.Table<Project>().Count() == 0)
             {
+                conn.Insert(new Worktime() { description = "back-end half gemaakt", task_id = 1, start_time = new DateTime(2014, 05, 05) });
+                conn.Insert(new Worktime() { description = "andere helft gemaakt", task_id = 1, start_time = new DateTime(2014, 05, 06) });
+
                 conn.Insert(new Task() { name = "Back-end maken", description = "Zorgen dat nieuwe boeken kunnen worden toegevoegd", project_id = 1 });
                 conn.Insert(new Task() { name = "Beginscherm maken", description = "De 10 goedkoopste boeken laten zien", project_id = 1 });
 

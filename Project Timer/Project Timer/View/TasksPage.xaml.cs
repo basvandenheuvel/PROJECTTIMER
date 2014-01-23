@@ -115,7 +115,10 @@ namespace Project_Timer.View
 
         private void taskClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //Navigate to worktime view... daar controleren we of het PROJECT op finished staat, dan mag er NIKS worden toegevoegd
+            //Get the task
+            Task task = (Task)((Grid)sender).DataContext;
+
+            App.RootFrame.Navigate(new Uri("/View/WorktimePage.xaml?pid=" + projectId + "&tid="+ task.id, UriKind.RelativeOrAbsolute));
         }
 
         private void toggleFinished(object sender, System.Windows.Input.GestureEventArgs e)
@@ -128,6 +131,11 @@ namespace Project_Timer.View
 
             checkAmountOfFinishedTasks();
             checkAmountOfTasks();
+        }
+
+        private void projectInfoClicked(object sender, EventArgs e)
+        {
+            //Show project info page... NOT AN EDIT PAGE!!
         }
     }
 }

@@ -59,7 +59,6 @@ namespace Project_Timer.ViewModel
 
         public void deleteTask(Model.Task task)
         {
-            MessageBox.Show("delete: " + task.id);
             //TODO: testen!!!!
 
             //Delete all worktime belonging to the project
@@ -161,6 +160,7 @@ namespace Project_Timer.ViewModel
         }
         public int ProjectId
         {
+            get { return projectId; }
             set { 
                     projectId = value;
                     ProjectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
