@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:vm="clr-namespace:Project_Timer.ViewModel"
+    xmlns:sparrow="clr-namespace:Sparrow.BulletGraph;assembly=Sparrow.BulletGraph.WP8.45"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -129,6 +130,7 @@
                     <!--Hours spend on this project-->
                     <TextBlock Grid.Row="2" Text="Total hours" Margin="0,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
                     <TextBlock Grid.Row="2" Text="{Binding TotalHours}" Margin="325,10,0,0" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                                        
 
                 </Grid>
             </phone:PivotItem>

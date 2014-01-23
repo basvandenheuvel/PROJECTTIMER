@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>Sparrow.BulletGraph.WP8</id>
+    <id>Sparrow.Chart.WP8</id>
     <version>13.1.0.113</version>
-    <title>Sparrow.BulletGraph.WP8</title>
+    <title>Sparrow.Chart.WP8</title>
     <authors>vinothkumarj</authors>
     <owners>vinothkumarj</owners>
     <licenseUrl>https://sparrowtoolkit.codeplex.com/license</licenseUrl>
@@ -14,9 +14,9 @@
     <releaseNotes>Sparrow Toolkit for WindowsPhone8</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <language />
-    <tags>WindowsPhone8 WindowsPhone DataVisualization BulletGraph Control Sparrow</tags>
+    <tags>WindowsPhone8 WindowsPhone DataVisualization Chart Control</tags>
     <references>
-      <reference file="Sparrow.BulletGraph.WP8.45.dll" />
+      <reference file="Sparrow.Chart.WP8.45.dll" />
     </references>
   </metadata>
 </package>
