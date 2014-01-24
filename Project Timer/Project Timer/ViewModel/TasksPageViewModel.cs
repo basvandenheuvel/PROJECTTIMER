@@ -40,6 +40,7 @@ namespace Project_Timer.ViewModel
         {
             //Tasks in progress
             tasks.Clear();
+            AmountOfTasks = 0;
 
             foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.Task>("SELECT * FROM Task WHERE project_id = " + projectId + " AND finished = 0"))
             {
@@ -49,6 +50,7 @@ namespace Project_Timer.ViewModel
 
             //Finished tasks
             finishedTasks.Clear();
+            AmountOfFinishedTasks = 0;
 
             foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.Task>("SELECT * FROM Task WHERE project_id = " + projectId + " AND finished = 1"))
             {
