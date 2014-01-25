@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Project_Timer.ViewModel
 {
-    public class WorktimePageViewModel
+    public class SessionPageViewModel
     {
         //Collection of worktimes
-        private ObservableCollection<Worktime> worktimes;   
+        private ObservableCollection<SessionTable> worktimes;   
 
         //Project id
         private int projectId;
@@ -28,28 +28,28 @@ namespace Project_Timer.ViewModel
         private String title;
 
 
-        public WorktimePageViewModel()
+        public SessionPageViewModel()
         {
-            worktimes = new ObservableCollection<Worktime>();
+            worktimes = new ObservableCollection<SessionTable>();
         }
 
         public void refreshWorktimes()
         {
             worktimes.Clear();
 
-            foreach (var w in DatabaseConnection.conn.Query<Worktime>("SELECT * FROM Worktime WHERE task_id = " + taskId))
+            foreach (var w in DatabaseConnection.conn.Query<SessionTable>("SELECT * FROM SessionTable WHERE task_id = " + taskId))
             {
                 worktimes.Add(w);
             }
         }
 
-        public void deleteWorktime(Worktime worktime)
+        public void deleteWorktime(SessionTable worktime)
         {
             //TODO: testen!!!!
 
             //Delete the worktime
-            DatabaseConnection.conn.Query<Worktime>("DELETE " +
-                                                    "FROM Worktime " +
+            DatabaseConnection.conn.Query<SessionTable>("DELETE " +
+                                                    "FROM SessionTable " +
                                                     "WHERE id  = " + worktime.id);
 
             worktimes.Remove(worktime);
@@ -57,7 +57,7 @@ namespace Project_Timer.ViewModel
 
 
         #region properties
-        public ObservableCollection<Worktime> Worktimes
+        public ObservableCollection<SessionTable> Worktimes
         {
             get { return worktimes; }
         }
@@ -92,7 +92,7 @@ namespace Project_Timer.ViewModel
             set
             {
                 projectId = value;
-                ProjectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
+                ProjectName = DatabaseConnection.conn.Query<ProjectTable>("SELECT name FROM ProjectTable WHERE id =" + projectId)[0].name;
             }
         }
         public int TaskId
@@ -101,7 +101,7 @@ namespace Project_Timer.ViewModel
             set
             {
                 taskId = value;
-                TaskName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Task WHERE id =" + taskId)[0].name;
+                TaskName = DatabaseConnection.conn.Query<ProjectTable>("SELECT name FROM TaskTable WHERE id =" + taskId)[0].name;
             }
         }
         #endregion

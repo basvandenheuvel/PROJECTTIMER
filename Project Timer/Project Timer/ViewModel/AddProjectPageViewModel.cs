@@ -14,7 +14,7 @@ namespace Project_Timer.ViewModel
     {
         private int projectId;
 
-        private Project project;
+        private ProjectTable project;
 
         public void saveProject(String name, String description, String client, DateTime? deadline)
         {
@@ -24,7 +24,7 @@ namespace Project_Timer.ViewModel
                 //Saving allowed; Default status is 'In progress'
 
                 //Create a new project
-                Project newProject = new Project() { name = name, description = description, client = client, deadline = deadline, finished = false };
+                ProjectTable newProject = new ProjectTable() { name = name, description = description, client = client, deadline = deadline, finished = false };
                 //Save the new project
                 DatabaseConnection.conn.Insert(newProject);
 
@@ -39,7 +39,7 @@ namespace Project_Timer.ViewModel
             if (checkRequiredFields(name, description))
             {
                 //Saving allowed; Default status is 'In progress'
-                DatabaseConnection.conn.Query<Project>("UPDATE Project SET name = '" + name  + "', description = '" + description + "', client = '" + client + "', deadline = '" + deadline + "' WHERE id =" + projectId);
+                DatabaseConnection.conn.Query<ProjectTable>("UPDATE ProjectTable SET name = '" + name  + "', description = '" + description + "', client = '" + client + "', deadline = '" + deadline + "' WHERE id =" + projectId);
             }
         }
 
@@ -61,10 +61,10 @@ namespace Project_Timer.ViewModel
             set
             { 
                 projectId = value;
-                project = DatabaseConnection.conn.Query<Project>("SELECT * FROM Project WHERE id =" + projectId)[0];
+                project = DatabaseConnection.conn.Query<ProjectTable>("SELECT * FROM ProjectTable WHERE id =" + projectId)[0];
             }
         }
-        public Project Project
+        public ProjectTable Project
         {
             get { return project; }
         }

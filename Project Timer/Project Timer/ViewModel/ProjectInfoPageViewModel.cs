@@ -19,7 +19,7 @@ namespace Project_Timer.ViewModel
 
         public void getData()
         {
-            Project project = DatabaseConnection.conn.Query<Project>("SELECT * FROM project WHERE id = " + projectId)[0];
+            ProjectTable project = DatabaseConnection.conn.Query<ProjectTable>("SELECT * FROM ProjectTable WHERE id = " + projectId)[0];
             Name = project.name;
             Description = project.description;
             Client = project.client;

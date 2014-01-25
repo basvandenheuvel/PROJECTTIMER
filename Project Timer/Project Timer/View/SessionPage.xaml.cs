@@ -12,10 +12,10 @@ using Project_Timer.Model;
 
 namespace Project_Timer.View
 {
-    public partial class WorktimePage : PhoneApplicationPage
+    public partial class SessionPage : PhoneApplicationPage
     {
         //Get the viewModel
-        private WorktimePageViewModel vm;
+        private SessionPageViewModel vm;
 
         //Project id
         private int projectId;
@@ -24,12 +24,12 @@ namespace Project_Timer.View
         private int taskId;
 
 
-        public WorktimePage()
+        public SessionPage()
         {
             InitializeComponent();
 
             //Set the viewmodel of this view
-            vm = (WorktimePageViewModel)LayoutRoot.DataContext;
+            vm = (SessionPageViewModel)LayoutRoot.DataContext;
         }
 
         //Method triggerd when navigated to this page
@@ -90,7 +90,7 @@ namespace Project_Timer.View
         private void deleteSessionClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //Get the worktime
-            Worktime worktime = (Worktime)((MenuItem)sender).DataContext;
+            SessionTable worktime = (SessionTable)((MenuItem)sender).DataContext;
 
             //Prompt the user if he/she is sure 
             MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the session?", "Delete session?", MessageBoxButton.OKCancel);

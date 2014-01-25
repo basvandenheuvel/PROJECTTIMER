@@ -13,9 +13,9 @@ namespace Project_Timer.ViewModel
     public class TasksPageViewModel : INotifyPropertyChanged 
     {
         //Collection of tasks
-        private ObservableCollection<Project_Timer.Model.Task> tasks;        
+        private ObservableCollection<Project_Timer.Model.TaskTable> tasks;        
         //Collection of finished tasks
-        private ObservableCollection<Project_Timer.Model.Task> finishedTasks;
+        private ObservableCollection<Project_Timer.Model.TaskTable> finishedTasks;
 
         //Default project name
         private String projectName = "Project Timer";
@@ -32,8 +32,8 @@ namespace Project_Timer.ViewModel
 
         public TasksPageViewModel()
         {
-            tasks = new ObservableCollection<Project_Timer.Model.Task>();
-            finishedTasks = new ObservableCollection<Project_Timer.Model.Task>();
+            tasks = new ObservableCollection<Project_Timer.Model.TaskTable>();
+            finishedTasks = new ObservableCollection<Project_Timer.Model.TaskTable>();
         }
 
         public void refreshTasks()
@@ -42,7 +42,7 @@ namespace Project_Timer.ViewModel
             tasks.Clear();
             AmountOfTasks = 0;
 
-            foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.Task>("SELECT * FROM Task WHERE project_id = " + projectId + " AND finished = 0"))
+            foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.TaskTable>("SELECT * FROM TaskTable WHERE project_id = " + projectId + " AND finished = 0"))
             {
                 tasks.Add(t);
                 AmountOfTasks++;
@@ -52,25 +52,25 @@ namespace Project_Timer.ViewModel
             finishedTasks.Clear();
             AmountOfFinishedTasks = 0;
 
-            foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.Task>("SELECT * FROM Task WHERE project_id = " + projectId + " AND finished = 1"))
+            foreach (var t in DatabaseConnection.conn.Query<Project_Timer.Model.TaskTable>("SELECT * FROM TaskTable WHERE project_id = " + projectId + " AND finished = 1"))
             {
                 finishedTasks.Add(t);
                 AmountOfFinishedTasks++;
             }
         }
 
-        public void deleteTask(Model.Task task)
+        public void deleteTask(Model.TaskTable task)
         {
             //TODO: testen!!!!
 
             //Delete all worktime belonging to the project
-            DatabaseConnection.conn.Query<Project>( "DELETE " +
-                                                    "FROM Worktime " +
+            DatabaseConnection.conn.Query<ProjectTable>( "DELETE " +
+                                                    "FROM SessionTable " +
                                                     "WHERE task_id  = " + task.id);
 
             //Delete all tasks belonging to the project
-            DatabaseConnection.conn.Query<Project>( "DELETE " +
-                                                    "FROM Task " +
+            DatabaseConnection.conn.Query<ProjectTable>( "DELETE " +
+                                                    "FROM TaskTable " +
                                                     "WHERE id = " + task.id);
 
             if (task.finished)
@@ -85,12 +85,12 @@ namespace Project_Timer.ViewModel
             }
         }
 
-        public void toggleFinished(Project_Timer.Model.Task task)
+        public void toggleFinished(Project_Timer.Model.TaskTable task)
         {
             if (task.finished)
             {
                 //Set the task to in progress
-                DatabaseConnection.conn.Query<Project>("UPDATE Task SET finished = 0 WHERE id =" + task.id);
+                DatabaseConnection.conn.Query<ProjectTable>("UPDATE TaskTable SET finished = 0 WHERE id =" + task.id);
 
                 task.finished = false;
 
@@ -104,7 +104,7 @@ namespace Project_Timer.ViewModel
             else
             {
                 //Set the task to finished
-                DatabaseConnection.conn.Query<Project>("UPDATE Task SET finished = 1 WHERE id =" + task.id);
+                DatabaseConnection.conn.Query<ProjectTable>("UPDATE TaskTable SET finished = 1 WHERE id =" + task.id);
 
                 task.finished = true;
 
@@ -118,11 +118,11 @@ namespace Project_Timer.ViewModel
         }
 
         #region properties
-        public ObservableCollection<Project_Timer.Model.Task> Tasks
+        public ObservableCollection<Project_Timer.Model.TaskTable> Tasks
         {
             get { return tasks; }
         }
-        public ObservableCollection<Project_Timer.Model.Task> FinishedTasks
+        public ObservableCollection<Project_Timer.Model.TaskTable> FinishedTasks
         {
             get { return finishedTasks; }
         }
@@ -165,7 +165,7 @@ namespace Project_Timer.ViewModel
             get { return projectId; }
             set { 
                     projectId = value;
-                    ProjectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
+                    ProjectName = DatabaseConnection.conn.Query<ProjectTable>("SELECT name FROM ProjectTable WHERE id =" + projectId)[0].name;
                 }
         }
         #endregion

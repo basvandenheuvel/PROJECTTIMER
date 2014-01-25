@@ -95,8 +95,12 @@
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\DatabaseConnection.cs" />
+    <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\Session.cs" />
     <Compile Include="Model\Tables.cs" />
     <Compile Include="Model\Projects.cs" />
+    <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\Tasks.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="ViewModel\AddProjectPageViewModel.cs" />
@@ -104,7 +108,7 @@
     <Compile Include="ViewModel\ProjectInfoPageViewModel.cs" />
     <Compile Include="ViewModel\ProjectsPageViewModel.cs" />
     <Compile Include="ViewModel\TasksPageViewModel.cs" />
-    <Compile Include="ViewModel\WorktimePageViewModel.cs" />
+    <Compile Include="ViewModel\SessionPageViewModel.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -132,8 +136,8 @@
     <Compile Include="View\TasksPage.xaml.cs">
       <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WorktimePage.xaml.cs">
-      <DependentUpon>WorktimePage.xaml</DependentUpon>
+    <Compile Include="View\SessionPage.xaml.cs">
+      <DependentUpon>SessionPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +173,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\WorktimePage.xaml">
+    <Page Include="View\SessionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -59,14 +59,14 @@ namespace Project_Timer
             Project project = (Project)((MenuItem)sender).DataContext;
             
             //Prompt the user if he/she is sure 
-            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the project " + project.name + "?", "Delete project?", MessageBoxButton.OKCancel);
+            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the project " + project.Name + "?", "Delete project?", MessageBoxButton.OKCancel);
             
             if (mbr == MessageBoxResult.OK)
             {
                 //Delete project
                 vm.deleteProject(project);
 
-                if (project.finished)
+                if (project.Finished)
                 {
                     checkAmountOfFinishedProjects();
                 }
@@ -82,7 +82,7 @@ namespace Project_Timer
             Project project = (Project)((Grid)sender).DataContext;
             
             //Open taskpage
-            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ project.id, UriKind.RelativeOrAbsolute));
+            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ project.Id, UriKind.RelativeOrAbsolute));
         }
 
 

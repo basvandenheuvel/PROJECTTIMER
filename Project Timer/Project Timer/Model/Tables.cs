@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_Timer.Model
 {
-    public sealed class Project
+    public sealed class ProjectTable
     {
         [PrimaryKey, AutoIncrement]
         public int id { get; set; }
@@ -28,7 +28,7 @@ namespace Project_Timer.Model
         }
     }
 
-    public sealed class Task
+    public sealed class TaskTable
     {
         [PrimaryKey, AutoIncrement]
         public int id { get; set; }
@@ -47,7 +47,7 @@ namespace Project_Timer.Model
         }
     }
 
-    public sealed class Worktime
+    public sealed class SessionTable
     {
         [PrimaryKey, AutoIncrement]
         public int id { get; set; }

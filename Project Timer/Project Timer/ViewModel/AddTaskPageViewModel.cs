@@ -29,7 +29,7 @@ namespace Project_Timer.ViewModel
             //Saving allowed
 
             //Save the new project
-            DatabaseConnection.conn.Insert(new Project_Timer.Model.Task() { name = name, description = description, finished = false, project_id = project_id  });
+            DatabaseConnection.conn.Insert(new Project_Timer.Model.TaskTable() { name = name, description = description, finished = false, project_id = project_id  });
 
             //Redirect to the project page of the new project
             App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ project_id, UriKind.RelativeOrAbsolute));
@@ -47,7 +47,7 @@ namespace Project_Timer.ViewModel
             get { return projectId; }
             set { 
                     projectId = value;
-                    projectName = DatabaseConnection.conn.Query<Project>("SELECT name FROM Project WHERE id =" + projectId)[0].name;
+                    projectName = DatabaseConnection.conn.Query<ProjectTable>("SELECT name FROM ProjectTable WHERE id =" + projectId)[0].name;
                 }
         }
         #endregion

@@ -12,15 +12,16 @@ namespace Project_Timer.ViewModel
 {
     public class ProjectsPageViewModel 
     {
-        //Collection of projects in progress
-        private ObservableCollection<Project> projectsInProgress;
-        //Collection of projects that are finished
-        private ObservableCollection<Project> projectsFinished;
+        private Projects projectsModel;
+
+        private ObservableCollection<Project> projectsInProgress; //Collection of projects in progress
+        private ObservableCollection<Project> projectsFinished; //Collection of projects that are finished
 
         public ProjectsPageViewModel()
         {
             projectsInProgress = new ObservableCollection<Project>();
             projectsFinished = new ObservableCollection<Project>();
+            projectsModel = new Projects();
         }
 
         public void refreshProjects()
@@ -28,40 +29,25 @@ namespace Project_Timer.ViewModel
             //Projects in progress
             ProjectsInProgress.Clear();
 
-            foreach (var s in DatabaseConnection.conn.Query<Project>("SELECT * FROM Project WHERE finished = 0"))
+            foreach (Project project in projectsModel.getUnfinishedProjects())
             {
-                ProjectsInProgress.Add(s);
+                ProjectsInProgress.Add(project);
             }
 
             //Finished projects
             ProjectsFinished.Clear();
 
-            foreach (var s in DatabaseConnection.conn.Query<Project>("SELECT * FROM Project WHERE finished = 1"))
+            foreach (Project project in projectsModel.getFinishedProjects())
             {
-                ProjectsFinished.Add(s);
+                ProjectsFinished.Add(project);
             }
         }
 
         public void deleteProject(Project project)
         {
-            //TODO: TESTEN!!!!
+            project.deleteProject();
 
-            //Delete all worktime belonging to the project
-            DatabaseConnection.conn.Query<Project>( "DELETE " +
-                                                    "FROM Worktime " +
-                                                    "WHERE task_id IN (SELECT id FROM Task WHERE project_id = " + project.id + ")");
-
-            //Delete all tasks belonging to the project
-            DatabaseConnection.conn.Query<Project>( "DELETE " +
-                                                    "FROM Task " +
-                                                    "WHERE project_id = " + project.id);
-
-            //Delete the project
-            DatabaseConnection.conn.Query<Project>( "DELETE " +
-                                                    "FROM Project " +
-                                                    "WHERE id = " + project.id);
-
-            if (project.finished)
+            if (project.Finished)
             {
                 ProjectsFinished.Remove(project);
             }
@@ -73,12 +59,10 @@ namespace Project_Timer.ViewModel
 
         public void toggleFinished(Project project)
         {
-            if (project.finished)
+            if (project.Finished)
             {
-                //Set the project to in progress
-                DatabaseConnection.conn.Query<Project>("UPDATE Project SET finished = 0 WHERE id =" + project.id);
-
-                project.finished = false;
+                project.Finished = false;
+                project.save();
 
                 //Place the project in the other collection
                 ProjectsFinished.Remove(project);
@@ -86,10 +70,8 @@ namespace Project_Timer.ViewModel
             }
             else
             {
-                //Set the project to finished
-                DatabaseConnection.conn.Query<Project>("UPDATE Project SET finished = 1 WHERE id =" + project.id);
-
-                project.finished = true;
+                project.Finished = true;
+                project.save();
 
                 //Place the project in the other collection
                 ProjectsInProgress.Remove(project);
