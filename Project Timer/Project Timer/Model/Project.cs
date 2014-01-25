@@ -12,10 +12,6 @@ namespace Project_Timer.Model
         //Database object
         ProjectTable pt;
 
-        //Derived variables
-        private String status;
-        private int unfinishedTaskAmount; //zie reloadDerivedVariables()
-
         /// <summary>
         /// Start creating a new project
         /// </summary>
@@ -31,14 +27,6 @@ namespace Project_Timer.Model
         public Project(int projectId)
         {
             pt = DatabaseConnection.conn.Query<ProjectTable>("SELECT * FROM ProjectTable WHERE id = " + projectId)[0];
-            reloadDerivedVariables();
-        }
-
-        private void reloadDerivedVariables()
-        {
-            if (pt.finished){ status = "Finished"; } else { status = "In progress"; }
-            //TODO: Werkt niet? Geeft altijd 0.
-            unfinishedTaskAmount = DatabaseConnection.conn.Query<int>("SELECT COUNT(*) FROM TaskTable WHERE finished = 0 AND project_id = " + pt.id)[0];
         }
 
         public List<Task> getTasks()
@@ -117,15 +105,7 @@ namespace Project_Timer.Model
         public Boolean Finished
         {
             get { return pt.finished; }
-            set { pt.finished = value; reloadDerivedVariables(); }
-        }
-        public String Status
-        {
-            get { return status; }
-        }
-        public int UnfinishedTaskAmount
-        {
-            get { return unfinishedTaskAmount; }
+            set { pt.finished = value; }
         }
         #endregion
     }

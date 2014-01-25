@@ -10,29 +10,28 @@ namespace Project_Timer.ViewModel
 {
     public class ProjectInfoPageViewModel : INotifyPropertyChanged
     {
+
+        private Projects projectsModel;
+        private Project projectModel;
+
         private int projectId;
-        private String name;
-        private String description;
-        private String client;
-        private String deadline;
         private String status;
 
-        public void getData()
+        public ProjectInfoPageViewModel()
         {
-            ProjectTable project = DatabaseConnection.conn.Query<ProjectTable>("SELECT * FROM ProjectTable WHERE id = " + projectId)[0];
-            Name = project.name;
-            Description = project.description;
-            Client = project.client;
-            Deadline = project.deadline.ToString();
+            projectsModel = new Projects();
+        }
 
-            if(project.finished)
-            {
-                Status = "Finished";
-            }
-            else 
-            {
-                Status = "In progress";
-            }
+        public void loadData()
+        {
+            projectModel = projectsModel.getProject(projectId);
+            OnPropertyChanged("Name");
+            OnPropertyChanged("Description");
+            OnPropertyChanged("Client");
+            OnPropertyChanged("Deadline");
+            
+            if(projectModel.Finished) { Status = "Finished"; } else  { Status = "In progress"; }
+            OnPropertyChanged("Status");
         }
 
         #region properties
@@ -42,44 +41,24 @@ namespace Project_Timer.ViewModel
             set 
             { 
                 projectId = value; 
-                getData();
+                loadData();
             }
         }
         public String Name
         {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }
+            get { return projectModel.Name; }
         }
         public String Description
         {
-            get { return description; }
-            set
-            {
-                description = value;
-                OnPropertyChanged("Description");
-            }
+            get { return projectModel.Description; }
         }
         public String Client
         {
-            get { return client; }
-            set
-            {
-                client = value;
-                OnPropertyChanged("Client");
-            }
+            get { return projectModel.Client; }
         }
         public String Deadline
         {
-            get { return deadline; }
-            set
-            {
-                deadline = value;
-                OnPropertyChanged("Deadline");
-            }
+            get { return projectModel.Deadline.Value.ToShortDateString(); }
         }
         public String Status
         {
