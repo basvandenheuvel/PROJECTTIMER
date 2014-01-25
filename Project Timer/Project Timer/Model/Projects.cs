@@ -55,5 +55,10 @@ namespace Project_Timer.Model
             newProject.save();
         }
 
+        public void deleteProject(int projectId)
+        {
+            new Project(projectId).deleteProject();
+        }
+
     }
 }

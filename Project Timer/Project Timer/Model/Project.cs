@@ -9,8 +9,10 @@ namespace Project_Timer.Model
 {
     public class Project
     {
-        //Database object
+        //Database objects
         ProjectTable pt;
+
+        Tasks taskModel = new Tasks();
 
         /// <summary>
         /// Start creating a new project
@@ -31,7 +33,17 @@ namespace Project_Timer.Model
 
         public List<Task> getTasks()
         {
-            throw new NotImplementedException("Unfinished method");
+            return taskModel.getProjectTasks(pt.id);
+        }
+
+        public List<Task> getFinishedTasks()
+        {
+            return taskModel.getFinishedTasks(pt.id);
+        }
+
+        public List<Task> getUnfinishedTasks()
+        {
+            return taskModel.getUnfinishedTasks(pt.id);
         }
 
         #region database update/save/delete

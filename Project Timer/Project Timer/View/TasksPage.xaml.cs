@@ -53,17 +53,17 @@ namespace Project_Timer.View
         private void deleteTaskClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //Get the project
-            TaskTable task = (TaskTable)((MenuItem)sender).DataContext;
+            Task task = (Task)((MenuItem)sender).DataContext;
 
             //Prompt the user if he/she is sure 
-            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the task " + task.name + "?", "Delete task?", MessageBoxButton.OKCancel);
+            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the task " + task.Name + "?", "Delete task?", MessageBoxButton.OKCancel);
 
             if (mbr == MessageBoxResult.OK)
             {
                 //Delete project
                 vm.deleteTask(task);
 
-                if (task.finished)
+                if (task.Finished)
                 {
                     checkAmountOfFinishedTasks();
                 }
@@ -116,15 +116,15 @@ namespace Project_Timer.View
         private void taskClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //Get the task
-            TaskTable task = (TaskTable)((Grid)sender).DataContext;
+            Task task = (Task)((Grid)sender).DataContext;
 
-            App.RootFrame.Navigate(new Uri("/View/SessionPage.xaml?pid=" + projectId + "&tid="+ task.id, UriKind.RelativeOrAbsolute));
+            App.RootFrame.Navigate(new Uri("/View/SessionPage.xaml?pid=" + projectId + "&tid="+ task.Id, UriKind.RelativeOrAbsolute));
         }
 
         private void toggleFinished(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //Get the task
-            TaskTable task = (TaskTable)((MenuItem)sender).DataContext;
+            Task task = (Task)((MenuItem)sender).DataContext;
 
             //Mark the project as finished
             vm.toggleFinished(task);
