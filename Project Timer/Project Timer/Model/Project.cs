@@ -73,12 +73,12 @@ namespace Project_Timer.Model
         {
             //TODO: TESTEN!!!!
             //Delete all worktime belonging to the project
-            DatabaseConnection.conn.Query<ProjectTable>("DELETE " +
+            DatabaseConnection.conn.Query<SessionTable>("DELETE " +
                                                     "FROM SessionTable " +
-                                                    "WHERE task_id IN (SELECT id FROM Task WHERE project_id = " + Id + ")");
+                                                    "WHERE task_id IN (SELECT id FROM TaskTable WHERE project_id = " + Id + ")");
 
             //Delete all tasks belonging to the project
-            DatabaseConnection.conn.Query<ProjectTable>("DELETE " +
+            DatabaseConnection.conn.Query<TaskTable>("DELETE " +
                                                     "FROM TaskTable " +
                                                     "WHERE project_id = " + Id);
 

@@ -2,6 +2,7 @@
 using Project_Timer.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,26 +11,28 @@ using System.Windows.Navigation;
 
 namespace Project_Timer.ViewModel
 {
-    public class AddProjectPageViewModel
+    public class AddProjectPageViewModel : INotifyPropertyChanged
     {
         private int projectId;
 
-        private ProjectTable project;
+        private Projects projectsModel;
+        private Project projectModel;
+
+        public AddProjectPageViewModel()
+        {
+            projectsModel = new Projects();
+        }
 
         public void saveProject(String name, String description, String client, DateTime? deadline)
         {
             //Saving not allowed; Name and description must be filled in
             if (checkRequiredFields(name, description))
             {
-                //Saving allowed; Default status is 'In progress'
-
-                //Create a new project
-                ProjectTable newProject = new ProjectTable() { name = name, description = description, client = client, deadline = deadline, finished = false };
-                //Save the new project
-                DatabaseConnection.conn.Insert(newProject);
+                //Create new project
+                projectModel = projectsModel.addProject(name, description, deadline, client);
 
                 //Redirect to the project page of the new project
-                App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id=" + newProject.id, UriKind.RelativeOrAbsolute));
+                App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id=" + projectModel.Id, UriKind.RelativeOrAbsolute));
                 App.RootFrame.RemoveBackEntry();
             }
         }
@@ -61,13 +64,27 @@ namespace Project_Timer.ViewModel
             set
             { 
                 projectId = value;
-                project = DatabaseConnection.conn.Query<ProjectTable>("SELECT * FROM ProjectTable WHERE id =" + projectId)[0];
+                projectModel = projectsModel.getProject(value);
             }
         }
-        public ProjectTable Project
+        public String Name
         {
-            get { return project; }
+            get { return projectModel.Name; }
+        }
+        public String Description
+        {
+            get { return projectModel.Description; }
+        }
+        public DateTime? Deadline
+        {
+            get { return projectModel.Deadline; }
+        }
+        public String Client
+        {
+            get { return projectModel.Client; }
         }
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

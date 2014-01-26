@@ -53,10 +53,10 @@ namespace Project_Timer.View
         {
             if (firstTimeNavigatedTo)
             {
-                txt_Name.Text = vm.Project.name;
-                txt_Description.Text = vm.Project.description;
-                txt_Client.Text = "" + vm.Project.client;
-                date_Deadline.Value = vm.Project.deadline;
+                txt_Name.Text = vm.Name;
+                txt_Description.Text = vm.Description;
+                txt_Client.Text = "" + vm.Client;
+                date_Deadline.Value = vm.Deadline;
             }
         }
 

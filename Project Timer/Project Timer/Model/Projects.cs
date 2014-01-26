@@ -44,15 +44,17 @@ namespace Project_Timer.Model
             return projectList;
         }
 
-        public void addProject(String name, String description, DateTime? deadline = null, String client = "")
+        public Project addProject(String name, String description, DateTime? deadline = null, String client = "")
         {
             Project newProject = new Project();
-            newProject.Name = "";
-            newProject.Description = "";
+            newProject.Name = name;
+            newProject.Description = description;
             newProject.Deadline = deadline;
             newProject.Client = client;
             newProject.Finished = false;
             newProject.save();
+
+            return newProject;
         }
 
         public void deleteProject(int projectId)
