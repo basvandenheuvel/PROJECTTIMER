@@ -63,10 +63,10 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Name*" Grid.Row="0" Margin="12,6,0,0" />
-                <toolkit:PhoneTextBox Name="txt_Name" Margin="0,30,0,0" InputScope="Text" Padding="10,0,0,0" Grid.Row="0" BorderThickness="0" Height="70" MaxLength="45" />
+                <toolkit:PhoneTextBox Name="txt_Name" Text="{Binding Name}" Margin="0,30,0,0" InputScope="Text" Padding="10,0,0,0" Grid.Row="0" BorderThickness="0" Height="70" MaxLength="45" />
 
                 <TextBlock Text="Description" Grid.Row="1" Margin="12,6,0,0" />
-                <toolkit:PhoneTextBox Name="txt_Description"  Margin="0,30,0,0" InputScope="Text" Height="140" Grid.Row="1" Padding="10,0,0,0" AcceptsReturn="True" TextWrapping="Wrap"/>
+                <toolkit:PhoneTextBox Name="txt_Description" Text="{Binding Description}"  Margin="0,30,0,0" InputScope="Text" Height="140" Grid.Row="1" Padding="10,0,0,0" AcceptsReturn="True" TextWrapping="Wrap"/>
 
             </Grid>
         </Grid>

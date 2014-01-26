@@ -26,7 +26,6 @@ namespace Project_Timer.ViewModel
 
         public void saveProject(String name, String description, String client, DateTime? deadline)
         {
-            //Saving not allowed; Name and description must be filled in
             if (checkRequiredFields(name, description))
             {
                 if (client.Length < 1)
@@ -48,7 +47,7 @@ namespace Project_Timer.ViewModel
                 if (client.Length < 1)
                     client = null;
 
-                //Saving allowed; Default status is 'In progress'
+                //Update the project
                 projectModel.Name = name;
                 projectModel.Description = description;
                 projectModel.Client = client;
@@ -73,6 +72,7 @@ namespace Project_Timer.ViewModel
         #region properties
         public int ProjectId
         {
+            get { return projectId; }
             set
             { 
                 projectId = value;

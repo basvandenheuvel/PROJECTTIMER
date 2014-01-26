@@ -11,44 +11,89 @@ namespace Project_Timer.ViewModel
 {
     public class AddTaskPageViewModel
     {
-        //Default project name
-        private String projectName = "Project Timer";
-
         //Project id
         private int projectId;
+        private int taskId;
 
-        public void saveTask(String name, String description, int project_id)
+        private Projects projectsModel;
+        private Project projectModel;
+        private Tasks tasksModel;
+        private Model.Task taskModel;
+
+        public AddTaskPageViewModel()
+        {
+            projectsModel = new Projects();
+            tasksModel = new Tasks();
+            taskModel = new Model.Task();
+        }
+
+        public void saveTask(String name, String description)
+        {
+            if (checkRequiredFields(name))
+            {
+                if (description.Length < 1)
+                    description = null;
+
+                //Create new task
+                taskModel = tasksModel.addTask(name, description, projectModel.Id);
+            }
+        }
+
+        public void updateTask(String name, String description)
+        {
+            if (checkRequiredFields(name))
+            {
+                if (description.Length < 1)
+                    description = null;
+
+                //Update the task
+                taskModel.Name = name;
+                taskModel.Description = description;
+                taskModel.save();
+            }
+        }
+
+        public Boolean checkRequiredFields(String name)
         {
             //Saving not allowed; Name and description must be filled in
             if (String.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Task can't be saved. The task 'name' is required.");
-                return;
+                return false;
             }
-
-            //Saving allowed
-
-            //Save the new project
-            DatabaseConnection.conn.Insert(new Project_Timer.Model.TaskTable() { name = name, description = description, finished = false, project_id = project_id  });
-
-            //Redirect to the project page of the new project
-            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ project_id, UriKind.RelativeOrAbsolute));
-            App.RootFrame.RemoveBackEntry();
-            App.RootFrame.RemoveBackEntry();
+            return true;
         }
 
         #region properties
         public String ProjectName
         {
-            get { return projectName; }
+            get { return projectModel.Name; }
         }
         public int ProjectId
         {
             get { return projectId; }
-            set { 
-                    projectId = value;
-                    projectName = DatabaseConnection.conn.Query<ProjectTable>("SELECT name FROM ProjectTable WHERE id =" + projectId)[0].name;
-                }
+            set 
+            { 
+                projectId = value;
+                projectModel = projectsModel.getProject(value);
+            }
+        }
+        public int TaskId
+        {
+            get { return taskId; }
+            set
+            {
+                taskId = value;
+                taskModel = tasksModel.getTask(value);
+            }
+        }
+        public String taskName
+        {
+            get { return taskModel.Name; }
+        }
+        public String taskDescription
+        {
+            get { return taskModel.Description; }
         }
         #endregion
     }

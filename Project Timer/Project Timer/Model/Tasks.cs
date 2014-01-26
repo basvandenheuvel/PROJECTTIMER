@@ -53,11 +53,15 @@ namespace Project_Timer.Model
             return taskList;
         }
 
-        public void addTask(String name, String description, DateTime? deadline = null, String client = "")
+        public Task addTask(String name, String description, int projectId)
         {
             Task newTask = new Task();
-            newTask.Name = "";
+            newTask.Name = name;
+            newTask.Description = description;
+            newTask.ProjectId = projectId;
             newTask.save();
+
+            return newTask;
         }
 
         public void deleteTask(int taskId)

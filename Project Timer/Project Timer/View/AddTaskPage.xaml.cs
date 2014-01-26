@@ -14,11 +14,13 @@ namespace Project_Timer.View
 {
     public partial class AddTaskPage : PhoneApplicationPage
     {
-        //ViewModel
-        private AddTaskPageViewModel vm;
-
         //Project id
         private int projectId;
+        private int taskId;
+        private Boolean newTask = true;
+
+        //ViewModel
+        private AddTaskPageViewModel vm;
 
         public AddTaskPage()
         {
@@ -31,18 +33,34 @@ namespace Project_Timer.View
         //Method triggerd when navigated to this page
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            if (NavigationContext.QueryString.ContainsKey("pid"))
+            {
+                projectId = Int32.Parse(NavigationContext.QueryString["pid"]);
+                vm.ProjectId = projectId;
+            }
+
             if (NavigationContext.QueryString.ContainsKey("id"))
             {
-                projectId = Int32.Parse(NavigationContext.QueryString["id"]);
-
-                vm.ProjectId = projectId;
+                taskId = Int32.Parse(NavigationContext.QueryString["id"]);
+                vm.TaskId = taskId;
+                newTask = false;
             }
         }
 
         private void saveButtonClicked(object sender, EventArgs e)
         {
-            //Call the save method in the viewModel
-            vm.saveTask(txt_Name.Text, txt_Description.Text, projectId);
+            if (newTask)
+            {
+                //Call the save method in the viewModel
+                vm.saveTask(txt_Name.Text, txt_Description.Text);
+                NavigationService.GoBack();
+            }
+            else
+            {
+                //Call the update method in the viewModel
+                vm.updateTask(txt_Name.Text, txt_Description.Text);
+                NavigationService.GoBack();
+            }
         }
 
         private void cancelButtonClicked(object sender, EventArgs e)
