@@ -58,7 +58,14 @@ namespace Project_Timer.ViewModel
         }
         public String Deadline
         {
-            get { return projectModel.Deadline.Value.ToShortDateString(); }
+            get
+            {
+                if (projectModel.Deadline != null)
+                {
+                    return projectModel.Deadline.Value.ToShortDateString();
+                }
+                return null;
+            }
         }
         public String Status
         {

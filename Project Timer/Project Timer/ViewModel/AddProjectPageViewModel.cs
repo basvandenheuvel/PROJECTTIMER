@@ -21,6 +21,7 @@ namespace Project_Timer.ViewModel
         public AddProjectPageViewModel()
         {
             projectsModel = new Projects();
+            projectModel = new Project();
         }
 
         public void saveProject(String name, String description, String client, DateTime? deadline)
@@ -28,6 +29,9 @@ namespace Project_Timer.ViewModel
             //Saving not allowed; Name and description must be filled in
             if (checkRequiredFields(name, description))
             {
+                if (client.Length < 1)
+                    client = null;
+
                 //Create new project
                 projectModel = projectsModel.addProject(name, description, deadline, client);
 
@@ -41,6 +45,9 @@ namespace Project_Timer.ViewModel
         {
             if (checkRequiredFields(name, description))
             {
+                if (client.Length < 1)
+                    client = null;
+
                 //Saving allowed; Default status is 'In progress'
                 projectModel.Name = name;
                 projectModel.Description = description;
