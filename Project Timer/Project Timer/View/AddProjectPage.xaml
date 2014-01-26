@@ -72,7 +72,7 @@
                 <toolkit:PhoneTextBox Name="txt_Description" Text="{Binding Description}"   Margin="0,30,0,0" InputScope="Text" Height="190" Grid.Row="1" Padding="10,0,0,0" AcceptsReturn="True" TextWrapping="Wrap"/>
 
                 <TextBlock Text="Deadline" Grid.Row="2" Margin="12,6,0,0" />
-                <toolkit:DatePicker Value="{Binding Deadline}" Name="date_Deadline"   Margin="0,30,0,0" Grid.Row="2" />
+                <toolkit:DatePicker Value="{Binding Deadline}" Name="date_Deadline"  Margin="0,30,0,0" Grid.Row="2" Hold="datepicker_Hold" />
 
                 <TextBlock Text="Client" Grid.Row="3" Margin="12,6,0,0" />
                 <toolkit:PhoneTextBox Name="txt_Client" Text="{Binding Client}"   Margin="0,30,0,0" InputScope="Text" Padding="10,0,0,0" Grid.Row="3" BorderThickness="0" Height="70" MaxLength="45" />

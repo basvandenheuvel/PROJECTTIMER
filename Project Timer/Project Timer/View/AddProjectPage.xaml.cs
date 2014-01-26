@@ -63,5 +63,10 @@ namespace Project_Timer.View
         {
             NavigationService.GoBack();
         }
+
+        private void datepicker_Hold(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            date_Deadline.Value = null;
+        }
     }
 }
