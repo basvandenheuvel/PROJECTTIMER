@@ -18,7 +18,6 @@ namespace Project_Timer.View
         private int projectId;
 
         private Boolean newProject = true;
-        private Boolean firstTimeNavigatedTo = true;
 
         //Viewmodel
         private AddProjectPageViewModel vm;
@@ -41,22 +40,7 @@ namespace Project_Timer.View
                 //Set the project id in the viewmodel
                 vm.ProjectId = projectId;
 
-                //Fill the view elements with the correct information
-                getData();
-
                 newProject = false;
-                firstTimeNavigatedTo = false;
-            }
-        }
-
-        private void getData()
-        {
-            if (firstTimeNavigatedTo)
-            {
-                //txt_Name.Text = vm.Name;
-                txt_Description.Text = vm.Description;
-                txt_Client.Text = "" + vm.Client;
-                date_Deadline.Value = vm.Deadline;
             }
         }
 
