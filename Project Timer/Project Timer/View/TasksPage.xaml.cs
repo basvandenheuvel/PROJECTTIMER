@@ -47,7 +47,7 @@ namespace Project_Timer.View
 
         private void AddTaskClicked(object sender, EventArgs e)
         {
-            App.RootFrame.Navigate(new Uri("/View/AddTaskPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
+            App.RootFrame.Navigate(new Uri("/View/AddTaskPage.xaml?pid=" + projectId, UriKind.RelativeOrAbsolute));
         }
 
         private void deleteTaskClicked(object sender, System.Windows.Input.GestureEventArgs e)

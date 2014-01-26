@@ -16,7 +16,6 @@ namespace Project_Timer.View
     {
         //Project id
         private int projectId;
-
         private Boolean newProject = true;
 
         //Viewmodel
@@ -25,14 +24,14 @@ namespace Project_Timer.View
         public AddProjectPage()
         {
             InitializeComponent();
+
+            //Set the viewmodel
+            vm = (AddProjectPageViewModel)LayoutRoot.DataContext;
         }
 
         //Method triggerd when navigated to this page
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            //Set the viewmodel
-            vm = (AddProjectPageViewModel)LayoutRoot.DataContext;
-
             if (NavigationContext.QueryString.ContainsKey("id"))
             {
                 projectId = Int32.Parse(NavigationContext.QueryString["id"]);
