@@ -10,9 +10,12 @@ namespace Project_Timer.Model
     public class Project
     {
         //Database objects
-        ProjectTable pt;
+        private ProjectTable pt;
 
-        Tasks taskModel = new Tasks();
+        //Amount of tasks
+        private int amountOfTasks;
+
+        private Tasks taskModel = new Tasks();
 
         /// <summary>
         /// Start creating a new project
@@ -29,6 +32,13 @@ namespace Project_Timer.Model
         public Project(int projectId)
         {
             pt = DatabaseConnection.conn.Query<ProjectTable>("SELECT * FROM ProjectTable WHERE id = " + projectId)[0];
+
+            amountOfTasks = getAmountOfTasks();
+        }
+
+        public int getAmountOfTasks()
+        {
+            return DatabaseConnection.conn.Query<int>("SELECT * FROM TaskTable WHERE finished = 0 AND project_id = " + pt.id).Count;
         }
 
         public List<Task> getTasks()
@@ -118,6 +128,10 @@ namespace Project_Timer.Model
         {
             get { return pt.finished; }
             set { pt.finished = value; }
+        }
+        public int AmountOfTasks
+        {
+            get { return amountOfTasks; }
         }
         #endregion
     }

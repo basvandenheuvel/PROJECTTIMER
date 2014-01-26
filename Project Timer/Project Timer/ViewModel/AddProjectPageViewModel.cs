@@ -11,7 +11,7 @@ using System.Windows.Navigation;
 
 namespace Project_Timer.ViewModel
 {
-    public class AddProjectPageViewModel : INotifyPropertyChanged
+    public class AddProjectPageViewModel
     {
         private int projectId;
 
@@ -42,7 +42,12 @@ namespace Project_Timer.ViewModel
             if (checkRequiredFields(name, description))
             {
                 //Saving allowed; Default status is 'In progress'
-                DatabaseConnection.conn.Query<ProjectTable>("UPDATE ProjectTable SET name = '" + name  + "', description = '" + description + "', client = '" + client + "', deadline = '" + deadline + "' WHERE id =" + projectId);
+                projectModel.Name = name;
+                projectModel.Description = description;
+                projectModel.Client = client;
+                projectModel.Deadline = deadline;
+
+                projectModel.save();
             }
         }
 
@@ -84,7 +89,5 @@ namespace Project_Timer.ViewModel
             get { return projectModel.Client; }
         }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
