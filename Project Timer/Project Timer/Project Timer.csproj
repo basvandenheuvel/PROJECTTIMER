@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.props" Condition="Exists('..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -223,11 +224,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="SQLite.WP80, Version=3.8.2">
-      <Name>SQLite for Windows Phone</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
@@ -235,14 +231,18 @@
     <Reference Include="Sparrow.Chart.WP8.45">
       <HintPath>..\packages\Sparrow.Chart.WP8.13.1.0.113\lib\windowsphone8\Sparrow.Chart.WP8.45.dll</HintPath>
     </Reference>
+    <Reference Include="Sqlite">
+      <HintPath>..\packages\sqlite-net-wp8.3.8.4.3\lib\windowsphone8\Sqlite.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\sqlite-net-wp8-master\Sqlite.vcxproj">
-      <Project>{59B35F6C-E062-4F0E-88D8-13F3F82A24F3}</Project>
-      <Name>Sqlite</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="SQLite.WP80, Version=3.8.4.3">
+      <Name>SQLite for Windows Phone</Name>
+    </SDKReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
@@ -253,4 +253,12 @@
   </Target>
   -->
   <ProjectExtensions />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.props'))" />
+    <Error Condition="!Exists('..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.targets'))" />
+  </Target>
+  <Import Project="..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.targets" Condition="Exists('..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.targets')" />
 </Project>

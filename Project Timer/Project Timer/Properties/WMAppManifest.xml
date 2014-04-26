@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{fa7aa305-1716-4d5e-985d-f8b2c8438e78}" Title="Project_Timer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Project_Timer author" Description="Sample description" Publisher="Project_Timer" PublisherID="{a0745e87-3468-42cc-80be-b2e1cba1b4a9}">
+  <App xmlns="" ProductID="{fa7aa305-1716-4d5e-985d-f8b2c8438e78}" Title="Project Timer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Project_Timer author" Description="Sample description" Publisher="Project_Timer" PublisherID="{a0745e87-3468-42cc-80be-b2e1cba1b4a9}">
     <IconPath IsRelative="true" IsResource="false">logosmall.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -19,17 +19,21 @@
           <SmallImageURI IsRelative="true" IsResource="false">logosmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">logomedium.png</BackgroundImageURI>
-          <Title>Project_Timer</Title>
+          <Title>Project Timer</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
           </BackBackgroundImageURI>
           <BackTitle>
           </BackTitle>
+          <LargeBackgroundImageURI IsRelative="true" IsResource="false">
+          </LargeBackgroundImageURI>
+          <LargeBackContent />
+          <LargeBackBackgroundImageURI IsRelative="true" IsResource="false">
+          </LargeBackBackgroundImageURI>
           <DeviceLockImageURI>
           </DeviceLockImageURI>
-          <HasLarge>
-          </HasLarge>
+          <HasLarge>True</HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
