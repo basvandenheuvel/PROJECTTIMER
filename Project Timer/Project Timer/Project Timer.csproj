@@ -241,14 +241,13 @@
     </Reference>
     <Reference Include="Sqlite">
       <HintPath>..\packages\sqlite-net-wp8.3.8.5\lib\windowsphone8\Sqlite.winmd</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="SQLite.WP80, Version=3.8.2">
+    <SDKReference Include="SQLite.WP80, Version=3.8.5">
       <Name>SQLite for Windows Phone</Name>
     </SDKReference>
   </ItemGroup>
