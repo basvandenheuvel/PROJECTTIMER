@@ -64,18 +64,14 @@ namespace Project_Timer.ViewModel
                 project.Finished = false;
                 project.save();
 
-                //Place the project in the other collection
-                ProjectsFinished.Remove(project);
-                ProjectsInProgress.Add(project);
+                refreshProjects();
             }
             else
             {
                 project.Finished = true;
                 project.save();
 
-                //Place the project in the other collection
-                ProjectsInProgress.Remove(project);
-                ProjectsFinished.Add(project);
+                refreshProjects();
             }
         }
 

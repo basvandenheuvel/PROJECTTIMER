@@ -22,7 +22,7 @@ namespace Project_Timer.View
         private void deleteDataClicked(object sender, RoutedEventArgs e)
         {
             //Prompt the user if he/she is sure 
-            MessageBoxResult mbr = MessageBox.Show("All data will be deleted. Are you sure you want to delete the complete database?", "Warning!", MessageBoxButton.OKCancel);
+            MessageBoxResult mbr = MessageBox.Show("All data will be removed. Are you sure you want to delete all data?", "Warning!", MessageBoxButton.OKCancel);
 
             if (mbr == MessageBoxResult.OK)
             {

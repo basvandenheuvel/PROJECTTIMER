@@ -74,6 +74,8 @@ namespace Project_Timer
                 {
                     checkAmountOfProjects();
                 }
+
+                RefreshContextMenu(sender);
             }
         }
 
@@ -125,11 +127,20 @@ namespace Project_Timer
             //Get the project
             Project project = (Project)((MenuItem)sender).DataContext;
 
+
             //Mark the project as finished
             vm.toggleFinished(project);
 
             checkAmountOfFinishedProjects();
             checkAmountOfProjects();
+
+            RefreshContextMenu(sender);
+        }
+
+        private void RefreshContextMenu(object sender)
+        {
+            ContextMenu cm = (ContextMenu)((MenuItem)sender).Parent;
+            cm.ClearValue(FrameworkElement.DataContextProperty);
         }
     }
 }
