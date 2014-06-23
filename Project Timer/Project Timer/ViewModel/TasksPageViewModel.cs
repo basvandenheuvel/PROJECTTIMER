@@ -85,25 +85,15 @@ namespace Project_Timer.ViewModel
                 task.Finished = false;
                 task.save();
 
-                //Place the task in the other collection
-                FinishedTasks.Remove(task);
-                Tasks.Add(task);
-
-                AmountOfTasks++;
-                AmountOfFinishedTasks--;
+                refreshTasks();
             }
             else
             {
                 //Set the task to finished
                 task.Finished = true;
                 task.save();
-
-                //Place the project in the other collection
-                Tasks.Remove(task);
-                FinishedTasks.Add(task);
-
-                AmountOfTasks--;
-                AmountOfFinishedTasks++;
+                
+                refreshTasks();
             }
         }
 

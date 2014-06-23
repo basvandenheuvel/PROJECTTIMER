@@ -71,6 +71,8 @@ namespace Project_Timer.View
                 {
                     checkAmountOfTasks();
                 }
+
+                RefreshContextMenu(sender);
             }
         }
         
@@ -131,12 +133,20 @@ namespace Project_Timer.View
 
             checkAmountOfFinishedTasks();
             checkAmountOfTasks();
+
+            RefreshContextMenu(sender);
         }
 
         private void projectInfoClicked(object sender, EventArgs e)
         {
             //Show project info page.
             App.RootFrame.Navigate(new Uri("/View/ProjectInfoPage.xaml?id=" + projectId, UriKind.RelativeOrAbsolute));
+        }
+
+        private void RefreshContextMenu(object sender)
+        {
+            ContextMenu cm = (ContextMenu)((MenuItem)sender).Parent;
+            cm.ClearValue(FrameworkElement.DataContextProperty);
         }
     }
 }
