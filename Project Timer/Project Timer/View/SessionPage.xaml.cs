@@ -84,7 +84,8 @@ namespace Project_Timer.View
 
         private void taskInfoClicked(object sender, EventArgs e)
         {
-
+            //Show task info page.
+            App.RootFrame.Navigate(new Uri("/View/TaskInfoPage.xaml?id=" + taskId, UriKind.RelativeOrAbsolute));
         }
 
         private void deleteSessionClicked(object sender, System.Windows.Input.GestureEventArgs e)
