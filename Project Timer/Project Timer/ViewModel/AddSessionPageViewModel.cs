@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Project_Timer.ViewModel
 {
-    public class AddTaskPageViewModel
+    public class AddSessionPageViewModel
     {
         //Project id
         private int projectId;
@@ -20,7 +20,7 @@ namespace Project_Timer.ViewModel
         private Tasks tasksModel;
         private Model.Task taskModel;
 
-        public AddTaskPageViewModel()
+        public AddSessionPageViewModel()
         {
             projectsModel = new Projects();
             tasksModel = new Tasks();

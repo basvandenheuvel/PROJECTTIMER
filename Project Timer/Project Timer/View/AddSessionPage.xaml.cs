@@ -12,10 +12,10 @@ using Project_Timer.Model;
 
 namespace Project_Timer.View
 {
-    public partial class SessionPage : PhoneApplicationPage
+    public partial class AddSessionPage : PhoneApplicationPage
     {
         //Get the viewModel
-        private SessionPageViewModel vm;
+        private AddSessionPageViewModel vm;
 
         //Project id
         private int projectId;
@@ -24,12 +24,12 @@ namespace Project_Timer.View
         private int taskId;
 
 
-        public SessionPage()
+        public AddSessionPage()
         {
             InitializeComponent();
 
             //Set the viewmodel of this view
-            vm = (SessionPageViewModel)LayoutRoot.DataContext;
+            vm = (AddSessionPageViewModel)LayoutRoot.DataContext;
         }
 
         //Method triggerd when navigated to this page
@@ -59,7 +59,7 @@ namespace Project_Timer.View
 
         private void refreshWorktimes()
         {
-            vm.refreshWorktimes();
+            //vm.refreshWorktimes();
 
             checkAmountOfWorktimes();
         }
@@ -67,19 +67,19 @@ namespace Project_Timer.View
         private void checkAmountOfWorktimes()
         {
             //If there are 0 worktimes, show error message
-            if (vm.Worktimes.Count == 0)
-            {
-                ErrorMessage.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                ErrorMessage.Visibility = Visibility.Collapsed;
-            }
+            //if (vm.Worktimes.Count == 0)
+            //{
+            //    ErrorMessage.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    ErrorMessage.Visibility = Visibility.Collapsed;
+            //}
         }
 
         private void editTaskClicked(object sender, EventArgs e)
         {
-
+            App.RootFrame.Navigate(new Uri("/View/AddTaskPage.xaml?pid=" + projectId + "&id=" + taskId, UriKind.RelativeOrAbsolute));
         }
 
         private void taskInfoClicked(object sender, EventArgs e)
@@ -99,7 +99,7 @@ namespace Project_Timer.View
             if (mbr == MessageBoxResult.OK)
             {
                 //Delete project
-                vm.deleteWorktime(worktime);
+                //vm.deleteWorktime(worktime);
 
                 checkAmountOfWorktimes();
             }

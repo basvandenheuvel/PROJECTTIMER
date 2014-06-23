@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project_Timer.ViewModel
 {
-    public class SessionPageViewModel
+    public class SessionsPageViewModel : INotifyPropertyChanged
     {
         //Collection of worktimes
         private ObservableCollection<SessionTable> worktimes;   
@@ -28,7 +28,7 @@ namespace Project_Timer.ViewModel
         private String title;
 
 
-        public SessionPageViewModel()
+        public SessionsPageViewModel()
         {
             worktimes = new ObservableCollection<SessionTable>();
         }
@@ -66,8 +66,7 @@ namespace Project_Timer.ViewModel
             get { return title; }
             set {
                     title = value;
-                    OnPropertyChanged("Title");
-                    
+                    OnPropertyChanged("Title");                    
                 }
         }
         private String ProjectName
@@ -75,7 +74,6 @@ namespace Project_Timer.ViewModel
             set
             {
                 projectName = value;
-                Title = projectName + " - " + taskName;
             }
         }
         private String TaskName
