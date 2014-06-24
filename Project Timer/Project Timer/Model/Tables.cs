@@ -56,7 +56,7 @@ namespace Project_Timer.Model
 
         public DateTime start_time { get; set; }
 
-        public DateTime stop_time { get; set; }
+        public TimeSpan elapsed_time { get; set; }
 
         public int task_id { get; set; }
 

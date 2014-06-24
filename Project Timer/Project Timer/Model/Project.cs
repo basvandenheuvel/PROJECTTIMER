@@ -15,7 +15,7 @@ namespace Project_Timer.Model
         //Amount of tasks
         private int amountOfTasks;
 
-        private Tasks taskModel = new Tasks();
+        private Tasks tasksModel = new Tasks();
 
         /// <summary>
         /// Start creating a new project
@@ -43,17 +43,17 @@ namespace Project_Timer.Model
 
         public List<Task> getTasks()
         {
-            return taskModel.getProjectTasks(pt.id);
+            return tasksModel.getProjectTasks(pt.id);
         }
 
         public List<Task> getFinishedTasks()
         {
-            return taskModel.getFinishedTasks(pt.id);
+            return tasksModel.getFinishedTasks(pt.id);
         }
 
         public List<Task> getUnfinishedTasks()
         {
-            return taskModel.getUnfinishedTasks(pt.id);
+            return tasksModel.getUnfinishedTasks(pt.id);
         }
 
         #region database update/save/delete

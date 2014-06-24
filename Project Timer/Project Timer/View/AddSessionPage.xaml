@@ -35,32 +35,45 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.DataContext>
-            <vm:AddSessionPageViewModel/>
-        </Grid.DataContext>
-        <!--Pivot Control-->
-        <phone:Pivot Title="{Binding Title}">
-            
-            <!--Pivot item one-->
-            <phone:PivotItem Header="New session">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="200"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+    <ScrollViewer>
+        <Grid x:Name="LayoutRoot" Background="Transparent">
+            <Grid.DataContext>
+                <vm:AddSessionPageViewModel/>
+            </Grid.DataContext>
 
-                    <TextBlock Text="00:00"   Grid.Row="0" FontSize="{StaticResource PivotHeaderFontSize}" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    <Button Content="Start" Grid.Row="1" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                </Grid>
-            </phone:PivotItem>
-            
-        </phone:Pivot>
-    </Grid>
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock Text="NEW SESSION" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <!--<TextBlock Text="add project" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
+            </StackPanel>
+
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="134"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Description" Grid.Row="0" Margin="12,6,0,0" />
+                <toolkit:PhoneTextBox Name="txt_Description" Margin="0,30,0,0" InputScope="Text" Padding="10,0,0,0" Grid.Row="0" BorderThickness="0" Height="70" MaxLength="45" />
+
+                <TextBlock Name="txt_Time" Text="{Binding ElapsedTimeInString}"  Grid.Row="1" FontSize="{StaticResource PivotHeaderFontSize}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                <Button Name="btn_Timer" IsEnabled="{Binding MaxTimeNotReached}" Content="{Binding ButtonTimerText}" Click="btn_Timer_Click" Grid.Row="2" Margin="0,0,0,24" />
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+    
+   
 
     <!--ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
@@ -70,7 +83,8 @@
                 <shell:ApplicationBarMenuItem Text="edit task" Click="editTaskClicked"  />
             </shell:ApplicationBar.MenuItems>
             -->
-            <shell:ApplicationBarIconButton Text="save " IconUri="/Assets/AppBar/save.png" Click="addSessionClicked"/>
+            <shell:ApplicationBarIconButton Text="save " IconUri="/Assets/AppBar/save.png" Click="saveButtonClicked" />
+            <shell:ApplicationBarIconButton Text="cancel" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Click="cancelButtonClicked"  />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

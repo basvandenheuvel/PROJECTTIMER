@@ -11,55 +11,49 @@ namespace Project_Timer.ViewModel
 {
     public class SessionsPageViewModel : INotifyPropertyChanged
     {
-        //Collection of worktimes
-        private ObservableCollection<SessionTable> worktimes;   
+        private ObservableCollection<Session> sessions;   
 
-        //Project id
         private int projectId;
-        //Project name
-        private String projectName;
-
-        //Task id
         private int taskId;
-        //Taks name
-        private String taskName;
 
-        //Title
         private String title;
+
+        private Model.Task taskModel;
+        private Project projectModel;
 
 
         public SessionsPageViewModel()
         {
-            worktimes = new ObservableCollection<SessionTable>();
+            sessions = new ObservableCollection<Session>();
         }
 
         public void refreshWorktimes()
         {
-            worktimes.Clear();
+            sessions.Clear();
 
-            foreach (var w in DatabaseConnection.conn.Query<SessionTable>("SELECT * FROM SessionTable WHERE task_id = " + taskId))
+            foreach (Session session in taskModel.getSessions())
             {
-                worktimes.Add(w);
+                sessions.Add(session);
             }
         }
 
-        public void deleteWorktime(SessionTable worktime)
+        public void deleteSession(Session session)
         {
             //TODO: testen!!!!
 
             //Delete the worktime
             DatabaseConnection.conn.Query<SessionTable>("DELETE " +
                                                     "FROM SessionTable " +
-                                                    "WHERE id  = " + worktime.id);
+                                                    "WHERE id  = " + session.Id);
 
-            worktimes.Remove(worktime);
+            sessions.Remove(session);
         }
 
 
         #region properties
-        public ObservableCollection<SessionTable> Worktimes
+        public ObservableCollection<Session> Sessions
         {
-            get { return worktimes; }
+            get { return sessions; }
         }
         public String Title
         {
@@ -69,28 +63,13 @@ namespace Project_Timer.ViewModel
                     OnPropertyChanged("Title");                    
                 }
         }
-        private String ProjectName
-        {
-            set
-            {
-                projectName = value;
-            }
-        }
-        private String TaskName
-        {
-            set
-            {
-                taskName = value;
-                Title = projectName + " - " + taskName;
-            }
-        }
         public int ProjectId
         {
             get { return projectId; }
             set
             {
                 projectId = value;
-                ProjectName = DatabaseConnection.conn.Query<ProjectTable>("SELECT name FROM ProjectTable WHERE id =" + projectId)[0].name;
+                projectModel = new Project(projectId);
             }
         }
         public int TaskId
@@ -99,7 +78,8 @@ namespace Project_Timer.ViewModel
             set
             {
                 taskId = value;
-                TaskName = DatabaseConnection.conn.Query<ProjectTable>("SELECT name FROM TaskTable WHERE id =" + taskId)[0].name;
+                taskModel = new Model.Task(taskId);
+                Title = projectModel.Name + " - " + taskModel.Name;
             }
         }
         #endregion

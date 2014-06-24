@@ -67,7 +67,7 @@ namespace Project_Timer.View
         private void checkAmountOfWorktimes()
         {
             //If there are 0 worktimes, show error message
-            if (vm.Worktimes.Count == 0)
+            if (vm.Sessions.Count == 0)
             {
                 ErrorMessage.Visibility = Visibility.Visible;
             }
@@ -91,7 +91,7 @@ namespace Project_Timer.View
         private void deleteSessionClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //Get the worktime
-            SessionTable worktime = (SessionTable)((MenuItem)sender).DataContext;
+            Session session = (Session)((MenuItem)sender).DataContext;
 
             //Prompt the user if he/she is sure 
             MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the session?", "Delete session?", MessageBoxButton.OKCancel);
@@ -99,7 +99,7 @@ namespace Project_Timer.View
             if (mbr == MessageBoxResult.OK)
             {
                 //Delete project
-                vm.deleteWorktime(worktime);
+                vm.deleteSession(session);
 
                 checkAmountOfWorktimes();
             }
@@ -107,7 +107,7 @@ namespace Project_Timer.View
 
         private void addSessionClicked(object sender, EventArgs e)
         {
-
+            App.RootFrame.Navigate(new Uri("/View/AddSessionPage.xaml?tid=" + taskId, UriKind.RelativeOrAbsolute));
         }
     }
 }

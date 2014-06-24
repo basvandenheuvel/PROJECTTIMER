@@ -26,7 +26,7 @@ namespace Project_Timer.Model
         }
 
         //TODO: delete before upload
-        public static void fillStatusTable()
+        public static void FillWithTestData()
         {
             //Add the default statuses
             if (conn.Table<ProjectTable>().Count() == 0)

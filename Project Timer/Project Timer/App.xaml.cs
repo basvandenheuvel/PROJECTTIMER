@@ -64,7 +64,7 @@ namespace Project_Timer
         {
             //Create the tables for the database
             DatabaseConnection.createTables();
-            DatabaseConnection.fillStatusTable();
+            DatabaseConnection.FillWithTestData();
         }
 
         // Code to execute when the application is activated (brought to foreground)

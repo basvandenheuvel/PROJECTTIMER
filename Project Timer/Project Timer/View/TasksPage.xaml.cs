@@ -120,7 +120,7 @@ namespace Project_Timer.View
             //Get the task
             Task task = (Task)((Grid)sender).DataContext;
 
-            App.RootFrame.Navigate(new Uri("/View/SessionPage.xaml?pid=" + projectId + "&tid="+ task.Id, UriKind.RelativeOrAbsolute));
+            App.RootFrame.Navigate(new Uri("/View/SessionsPage.xaml?pid=" + projectId + "&tid="+ task.Id, UriKind.RelativeOrAbsolute));
         }
 
         private void toggleFinished(object sender, System.Windows.Input.GestureEventArgs e)

@@ -45,7 +45,7 @@ namespace Project_Timer.ViewModel
             tasks.Clear();
             finishedTasks.Clear();
 
-            //Tasks in progress
+            //Tasks finished
             foreach (Model.Task task in projectModel.getUnfinishedTasks())
             {
                 tasks.Add(task);

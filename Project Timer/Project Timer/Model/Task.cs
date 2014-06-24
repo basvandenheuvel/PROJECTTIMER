@@ -22,15 +22,20 @@ namespace Project_Timer.Model
         /// <summary>
         /// Load an existing task
         /// </summary>
-        /// <param name="projectId">ID of the task to load from the database</param>
+        /// <param name="taskId">ID of the task to load from the database</param>
         public Task(int taskId)
         {
             tt = DatabaseConnection.conn.Query<TaskTable>("SELECT * FROM TaskTable WHERE id = " + taskId)[0];
         }
 
-        public List<Task> getSessions()
+        public List<Session> getSessions()
         {
-            throw new NotImplementedException("Unfinished method");
+            List<Session> sessionList = new List<Session>();
+            foreach (SessionTable st in DatabaseConnection.conn.Query<SessionTable>("SELECT * FROM SessionTable WHERE task_id = " + tt.id))
+            {
+                sessionList.Add(new Session(st.id));
+            }
+            return sessionList;
         }
 
         #region database update/save/delete
@@ -60,13 +65,13 @@ namespace Project_Timer.Model
         {
             //TODO: testen!!!!
 
-            //Delete all worktime belonging to the project
-            DatabaseConnection.conn.Query<ProjectTable>("DELETE " +
+            //Delete all sessions belonging to the task
+            DatabaseConnection.conn.Query<SessionTable>("DELETE " +
                                                         "FROM SessionTable " +
                                                         "WHERE task_id  = " + Id);
 
-            //Delete all tasks belonging to the project
-            DatabaseConnection.conn.Query<ProjectTable>("DELETE " +
+            //Delete the task
+            DatabaseConnection.conn.Query<TaskTable>("DELETE " +
                                                         "FROM TaskTable " +
                                                         "WHERE id = " + Id);
         }

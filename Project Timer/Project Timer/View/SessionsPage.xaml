@@ -50,7 +50,7 @@
                     <!--Message when there are no sessions to show-->
                     <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" VerticalAlignment="Top" Text="There are no sessions." Height="50" Margin="15,0,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
 
-                    <phone:LongListSelector Margin="-12,0,0,0" ItemsSource="{Binding Worktimes}">
+                    <phone:LongListSelector Margin="-12,0,0,0" ItemsSource="{Binding Sessions}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
 
@@ -62,19 +62,19 @@
                                     </toolkit:ContextMenuService.ContextMenu>
 
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="60"/>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="250"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding start_time}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding stop_time}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding description}" TextWrapping="Wrap" MaxHeight="30" Margin="15,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding StartTimeInString}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElapsedTimeInString}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Description}" TextWrapping="Wrap" Margin="15,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                                    </Grid>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>

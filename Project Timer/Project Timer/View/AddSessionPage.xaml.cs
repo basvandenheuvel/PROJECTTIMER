@@ -9,6 +9,9 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Project_Timer.ViewModel;
 using Project_Timer.Model;
+using System.Windows.Threading;
+using System.Diagnostics;
+using System.ComponentModel;
 
 namespace Project_Timer.View
 {
@@ -17,11 +20,10 @@ namespace Project_Timer.View
         //Get the viewModel
         private AddSessionPageViewModel vm;
 
-        //Project id
-        private int projectId;
-
         //Task id
         private int taskId;
+
+        private Boolean isStarted;
 
 
         public AddSessionPage()
@@ -30,84 +32,64 @@ namespace Project_Timer.View
 
             //Set the viewmodel of this view
             vm = (AddSessionPageViewModel)LayoutRoot.DataContext;
+
+            isStarted = false;
         }
 
         //Method triggerd when navigated to this page
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            if (NavigationContext.QueryString.ContainsKey("pid"))
+            if (NavigationContext.QueryString.ContainsKey("tid"))
             {
-                projectId = Int32.Parse(NavigationContext.QueryString["pid"]);
+                taskId = Int32.Parse(NavigationContext.QueryString["tid"]);
 
-                if (NavigationContext.QueryString.ContainsKey("tid"))
+                vm.TaskId = taskId;               
+            }
+        }
+
+        private void btn_Timer_Click(object sender, RoutedEventArgs e)
+        {
+            if (vm.MaxTimeNotReached)
+            {
+                if (!isStarted)
                 {
-                    taskId = Int32.Parse(NavigationContext.QueryString["tid"]);
+                    vm.StartTimer();
+                    isStarted = true;
                 }
-
-                //Set the project id in the viewmodel
-                vm.ProjectId = projectId;
-                //Set the task id in the viewmodel
-                vm.TaskId = taskId;
-
-                //Refresh the worktimes
-                refreshWorktimes();
-
-                //Set default pivot page
-                //mainPivot.SelectedIndex = 0;
-            }
+                else
+                {
+                    vm.StopTimer();
+                    isStarted = false;
+                }
+            }            
         }
 
-        private void refreshWorktimes()
+        private void saveButtonClicked(object sender, EventArgs e)
         {
-            //vm.refreshWorktimes();
-
-            checkAmountOfWorktimes();
+            vm.StopTimer();
+            vm.saveSession(txt_Description.Text);
+            NavigationService.GoBack();
         }
 
-        private void checkAmountOfWorktimes()
+        private void cancelButtonClicked(object sender, EventArgs e)
         {
-            //If there are 0 worktimes, show error message
-            //if (vm.Worktimes.Count == 0)
-            //{
-            //    ErrorMessage.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    ErrorMessage.Visibility = Visibility.Collapsed;
-            //}
+            cancelNewSession();
         }
 
-        private void editTaskClicked(object sender, EventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            App.RootFrame.Navigate(new Uri("/View/AddTaskPage.xaml?pid=" + projectId + "&id=" + taskId, UriKind.RelativeOrAbsolute));
+            e.Cancel = true;
+            cancelNewSession();
         }
 
-        private void taskInfoClicked(object sender, EventArgs e)
+        private void cancelNewSession()
         {
-            //Show task info page.
-            App.RootFrame.Navigate(new Uri("/View/TaskInfoPage.xaml?id=" + taskId, UriKind.RelativeOrAbsolute));
-        }
-
-        private void deleteSessionClicked(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            //Get the worktime
-            SessionTable worktime = (SessionTable)((MenuItem)sender).DataContext;
-
-            //Prompt the user if he/she is sure 
-            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the session?", "Delete session?", MessageBoxButton.OKCancel);
-
-            if (mbr == MessageBoxResult.OK)
+            if (MessageBox.Show("Are you sure you want to cancel the new session?", "Confirm",
+                                    MessageBoxButton.OKCancel) != MessageBoxResult.Cancel)
             {
-                //Delete project
-                //vm.deleteWorktime(worktime);
-
-                checkAmountOfWorktimes();
+                vm.StopTimer();
+                NavigationService.GoBack();
             }
-        }
-
-        private void addSessionClicked(object sender, EventArgs e)
-        {
-
         }
     }
 }
