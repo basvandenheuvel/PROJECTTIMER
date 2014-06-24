@@ -24,6 +24,7 @@ namespace Project_Timer.View
         private int taskId;
 
         private Boolean isStarted;
+        private int timeInMinutes = 15;
 
 
         public AddSessionPage()
@@ -49,6 +50,12 @@ namespace Project_Timer.View
 
         private void btn_Timer_Click(object sender, RoutedEventArgs e)
         {
+            if (!vm.ChangesMade)
+            {
+                ApplicationBarIconButton save = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+                save.IsEnabled = true;
+            }
+
             if (vm.MaxTimeNotReached)
             {
                 if (!isStarted)
@@ -66,9 +73,12 @@ namespace Project_Timer.View
 
         private void saveButtonClicked(object sender, EventArgs e)
         {
-            vm.StopTimer();
-            vm.saveSession(txt_Description.Text);
-            NavigationService.GoBack();
+            if (vm.ChangesMade)
+            {
+                vm.StopTimer();
+                vm.saveSession(txt_Description.Text);
+                NavigationService.GoBack();
+            }
         }
 
         private void cancelButtonClicked(object sender, EventArgs e)
@@ -84,12 +94,30 @@ namespace Project_Timer.View
 
         private void cancelNewSession()
         {
-            if (MessageBox.Show("Are you sure you want to cancel the new session?", "Confirm",
-                                    MessageBoxButton.OKCancel) != MessageBoxResult.Cancel)
+            if (vm.ChangesMade)
+            {
+                if (MessageBox.Show("Are you sure you want to cancel the new session?", "Confirm cancel",
+                                        MessageBoxButton.OKCancel) != MessageBoxResult.Cancel)
+                {
+                    vm.StopTimer();
+                    NavigationService.GoBack();
+                }
+            }
+            else
             {
                 vm.StopTimer();
                 NavigationService.GoBack();
             }
+        }
+
+        private void plusTimerClicked(object sender, RoutedEventArgs e)
+        {
+            vm.AddTime(timeInMinutes);
+        }
+
+        private void substractTimerClicked(object sender, RoutedEventArgs e)
+        {
+            vm.SubstractTime(timeInMinutes);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,17 @@ namespace Project_Timer.Model
         public int getAmountOfTasks()
         {
             return DatabaseConnection.conn.Query<int>("SELECT * FROM TaskTable WHERE finished = 0 AND project_id = " + pt.id).Count;
+        }
+
+        public double getAmountOfHours()
+        {
+            TimeSpan totalTime = new TimeSpan();
+            foreach (SessionTable st in DatabaseConnection.conn.Query<SessionTable>("SELECT * FROM SessionTable LEFT JOIN TaskTable ON SessionTable.task_id = TaskTable.id WHERE TaskTable.project_id = " + pt.id))
+            {
+                totalTime += st.elapsed_time;
+            }
+
+            return Math.Round(totalTime.TotalHours, 2);
         }
 
         public List<Task> getTasks()

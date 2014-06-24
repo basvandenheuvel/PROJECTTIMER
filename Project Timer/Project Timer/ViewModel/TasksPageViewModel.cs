@@ -25,7 +25,7 @@ namespace Project_Timer.ViewModel
         //Amount of finished tasks a project has
         private int amountOfFinishedTasks;
         //Total hours spend on this project
-        private double totalHours = 12.5;
+        private double totalHours;
 
         //Project id
         private int projectId;
@@ -125,7 +125,7 @@ namespace Project_Timer.ViewModel
         }
         public double TotalHours
         {
-            get { return totalHours; }
+            get { return projectModel.getAmountOfHours(); }
             set
             {
                 totalHours = value;

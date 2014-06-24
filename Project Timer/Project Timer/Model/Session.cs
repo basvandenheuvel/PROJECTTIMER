@@ -17,6 +17,9 @@ namespace Project_Timer.Model
         private DateTime startTime;
         private DateTime firstStartTime;
 
+        private TimeSpan maxAllowedTime = new TimeSpan(23, 59, 59);
+        private TimeSpan minAllowedTime = new TimeSpan(0, 0, 0);
+
         private Boolean isRunning = false;
 
         /// <summary>
@@ -54,6 +57,35 @@ namespace Project_Timer.Model
             }
         }
 
+        public void AddTime(TimeSpan time)
+        {
+            TimeSpan temp = elapsedTime;
+
+            if (isRunning)
+            {
+                temp += (DateTime.Now - startTime);
+            }
+
+            if (temp + time <= maxAllowedTime)
+            {
+                elapsedTime += time;
+            }
+        }
+
+        public void SubstractTime(TimeSpan time)
+        {
+            TimeSpan temp = elapsedTime;
+
+            if (isRunning)
+            {
+                temp += (DateTime.Now - startTime);
+            }
+
+            if (temp - time >= minAllowedTime)
+            {
+                elapsedTime -= time;
+            }
+        }
 
 
         #region database save/delete
@@ -92,6 +124,10 @@ namespace Project_Timer.Model
         public String ElapsedTimeInString
         {
             get { return st.elapsed_time.ToString().Split('.')[0]; }
+        }
+        public TimeSpan MaxAllowedTime
+        {
+            get { return maxAllowedTime; }
         }
         public DateTime FirstStartTime
         {
