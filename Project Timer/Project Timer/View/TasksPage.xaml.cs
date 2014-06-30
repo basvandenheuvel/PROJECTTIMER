@@ -41,7 +41,7 @@ namespace Project_Timer.View
                 refreshTasks();
 
                 //Set default pivot page
-                mainPivot.SelectedIndex = 0;
+                //mainPivot.SelectedIndex = 0;
             }
         }
 

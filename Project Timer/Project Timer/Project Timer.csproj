@@ -95,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Model\ChartPoint.cs" />
     <Compile Include="Model\Sessions.cs" />
     <Compile Include="Model\DatabaseConnection.cs" />
     <Compile Include="Model\Project.cs" />

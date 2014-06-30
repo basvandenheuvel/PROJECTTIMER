@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace Project_Timer.ViewModel
 
         private ObservableCollection<Project_Timer.Model.Task> tasks; //Collection of unfinished tasks
         private ObservableCollection<Project_Timer.Model.Task> finishedTasks; //Collection of finished tasks
+        private ObservableCollection<ChartPoint> graphCollection; //Collection of all chartpoints for the graphic
 
         //Default project name
         private Projects projectsModel;
@@ -24,8 +27,10 @@ namespace Project_Timer.ViewModel
         private int amountOfTasks;
         //Amount of finished tasks a project has
         private int amountOfFinishedTasks;
-        //Total hours spend on this project
-        private double totalHours;
+
+        private int graphWidth;
+        private int graphInterval;
+        private int columnWidth = 30;
 
         //Project id
         private int projectId;
@@ -34,13 +39,13 @@ namespace Project_Timer.ViewModel
         {
             tasks = new ObservableCollection<Project_Timer.Model.Task>();
             finishedTasks = new ObservableCollection<Project_Timer.Model.Task>();
+            graphCollection = new ObservableCollection<ChartPoint>();
             projectsModel = new Projects();
         }
 
         public void refreshTasks()
         {
             projectModel = new Project(projectId);
-            OnPropertyChanged("ProjectName");
 
             tasks.Clear();
             finishedTasks.Clear();
@@ -59,6 +64,97 @@ namespace Project_Timer.ViewModel
 
             AmountOfTasks = Tasks.Count;
             AmountOfFinishedTasks = FinishedTasks.Count;
+
+            OnPropertyChanged("ProjectName");
+            OnPropertyChanged("TotalHours");
+
+            prepInfoForDiagram();
+            setGraphInterval();
+            setGraphWidth();
+
+
+            //OnPropertyChanged("TotalHours");
+
+            //OnPropertyChanged("GraphInterval");
+        }
+
+        private void prepInfoForDiagram()
+        {
+            List<ChartPoint> tempList = new List<ChartPoint>();
+
+            foreach (Model.Task task in projectModel.getTasks())
+            {
+                foreach (Session session in task.getSessions())
+                {
+                    tempList.Add(new ChartPoint(getWeekNumberOfDateTime(session.StartTime), session.ElapsedTimeInTimeSpan.TotalHours, session.StartTime.Year));                    
+                }
+            }
+
+            var sortedList = (
+                from point in tempList
+                group point by new { point.Year, point.Week }
+                    into grp
+                    orderby grp.Key.Year ascending, grp.Key.Week ascending
+                    select new
+                    {
+                        grp.Key.Week,
+                        grp.Key.Year,
+                        Hours = grp.Sum(point => point.Hours)
+                    }).ToList();
+
+            foreach (var group in sortedList)
+            {
+                graphCollection.Add(new ChartPoint(group.Week + "\r\n" +  group.Year, group.Hours, group.Year));
+            }
+        }
+
+        private void setGraphWidth()
+        {
+            int screenWidth = Int32.Parse(Application.Current.Host.Content.ActualWidth.ToString());
+            int minGraphWidth = screenWidth - 70;
+
+            int graphWidthWeWant = graphCollection.Count * columnWidth;
+            if (graphWidthWeWant < minGraphWidth)
+            {
+                graphWidth = minGraphWidth;
+            }
+            else
+            {
+                graphWidth = graphWidthWeWant;
+            }
+        }
+
+        private void setGraphInterval()
+        {
+            ChartPoint highestChartPoint = new ChartPoint("", 0, 0);
+
+            foreach (ChartPoint point in graphCollection)
+            {
+                if (point.Hours > highestChartPoint.Hours)
+                {
+                    highestChartPoint = point;
+                }
+            }
+
+            if (highestChartPoint.Hours <= 6)
+            {
+                graphInterval = 1;
+            }
+            else if (highestChartPoint.Hours > 6 && highestChartPoint.Hours <= 20)
+            {
+                graphInterval = 2;
+            }
+            else
+            {
+                graphInterval = 5;
+            }
+        }
+
+        private String getWeekNumberOfDateTime(DateTime date)
+        {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+            return cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString();
         }
 
         public void deleteTask(Model.Task task)
@@ -106,6 +202,18 @@ namespace Project_Timer.ViewModel
         {
             get { return finishedTasks; }
         }
+        public ObservableCollection<ChartPoint> GraphCollection
+        {
+            get { return graphCollection; }
+        }
+        public int GraphWidth
+        {
+            get { return graphWidth; }
+        }
+        public int GraphInterval
+        {
+            get { return graphInterval; }
+        }
         public int AmountOfTasks
         {
             get { return amountOfTasks; }
@@ -126,11 +234,6 @@ namespace Project_Timer.ViewModel
         public double TotalHours
         {
             get { return projectModel.getAmountOfHours(); }
-            set
-            {
-                totalHours = value;
-                OnPropertyChanged("TotalHours");
-            }
         }
         public String ProjectName
         {

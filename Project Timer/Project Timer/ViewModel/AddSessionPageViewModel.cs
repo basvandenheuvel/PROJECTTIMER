@@ -23,7 +23,6 @@ namespace Project_Timer.ViewModel
 
         private DispatcherTimer timer;
         private Boolean maxTimeNotReached;
-        private Boolean changesMade;
         private String buttonTimerText;
 
 
@@ -35,7 +34,6 @@ namespace Project_Timer.ViewModel
             tasksModel = new Tasks();
 
             maxTimeNotReached = true;
-            changesMade = false;
             buttonTimerText = "Start";
 
 
@@ -70,11 +68,6 @@ namespace Project_Timer.ViewModel
 
         public void StartTimer()
         {
-            if (!changesMade)
-            {
-                changesMade = true;
-            }
-
             sessionModel.StartTimer();
             timer.Start();
             buttonTimerText = "Stop";
@@ -119,10 +112,6 @@ namespace Project_Timer.ViewModel
         public Boolean MaxTimeNotReached
         {
             get { return maxTimeNotReached; }
-        }
-        public Boolean ChangesMade
-        {
-            get { return changesMade; }
         }
         public String ButtonTimerText
         {

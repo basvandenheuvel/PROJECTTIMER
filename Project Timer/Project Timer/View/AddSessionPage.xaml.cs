@@ -26,6 +26,8 @@ namespace Project_Timer.View
         private Boolean isStarted;
         private int timeInMinutes = 15;
 
+        private ApplicationBarIconButton buttonSave;
+
 
         public AddSessionPage()
         {
@@ -33,6 +35,9 @@ namespace Project_Timer.View
 
             //Set the viewmodel of this view
             vm = (AddSessionPageViewModel)LayoutRoot.DataContext;
+
+
+            buttonSave = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
 
             isStarted = false;
         }
@@ -50,10 +55,9 @@ namespace Project_Timer.View
 
         private void btn_Timer_Click(object sender, RoutedEventArgs e)
         {
-            if (!vm.ChangesMade)
+            if (!buttonSave.IsEnabled)
             {
-                ApplicationBarIconButton save = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
-                save.IsEnabled = true;
+                buttonSave.IsEnabled = true;
             }
 
             if (vm.MaxTimeNotReached)
@@ -73,7 +77,7 @@ namespace Project_Timer.View
 
         private void saveButtonClicked(object sender, EventArgs e)
         {
-            if (vm.ChangesMade)
+            if (buttonSave.IsEnabled)
             {
                 vm.StopTimer();
                 vm.saveSession(txt_Description.Text);
@@ -94,7 +98,7 @@ namespace Project_Timer.View
 
         private void cancelNewSession()
         {
-            if (vm.ChangesMade)
+            if (buttonSave.IsEnabled)
             {
                 if (MessageBox.Show("Are you sure you want to cancel the new session?", "Confirm cancel",
                                         MessageBoxButton.OKCancel) != MessageBoxResult.Cancel)
@@ -113,6 +117,11 @@ namespace Project_Timer.View
         private void plusTimerClicked(object sender, RoutedEventArgs e)
         {
             vm.AddTime(timeInMinutes);
+
+            if (!buttonSave.IsEnabled)
+            {
+                buttonSave.IsEnabled = true;
+            }
         }
 
         private void substractTimerClicked(object sender, RoutedEventArgs e)

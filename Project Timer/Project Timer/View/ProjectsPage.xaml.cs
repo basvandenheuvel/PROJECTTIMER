@@ -50,7 +50,7 @@ namespace Project_Timer
             refreshProjects();  
 
             //Set default pivot page
-            mainPivot.SelectedIndex = 0;
+            //mainPivot.SelectedIndex = 0;
         }
 
         private void deleteProjectClicked(object sender, RoutedEventArgs e)

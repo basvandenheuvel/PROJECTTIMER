@@ -91,9 +91,6 @@
         </Grid>
     </ScrollViewer>
 
-
-
-    <!--ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
             <!--

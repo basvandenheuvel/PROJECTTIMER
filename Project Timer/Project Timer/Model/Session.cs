@@ -125,6 +125,10 @@ namespace Project_Timer.Model
         {
             get { return st.elapsed_time.ToString().Split('.')[0]; }
         }
+        public TimeSpan ElapsedTimeInTimeSpan
+        {
+            get { return st.elapsed_time; }
+        }
         public TimeSpan MaxAllowedTime
         {
             get { return maxAllowedTime; }

@@ -111,7 +111,6 @@
 
             <!--Pivot item three-->
             <phone:PivotItem Header="Statistics">
-                <ScrollViewer>
                     <Grid Margin="12,0,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>
@@ -139,24 +138,18 @@
                         <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding TotalHours}" FontSize="{StaticResource PhoneFontSizeMedium}" />
 
                         <!-- chart -->
-                        <sparrow:SparrowChart Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,10,10,-10">
+                        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left"  >
+                        <sparrow:SparrowChart Margin="0,10,10,-10" Width="{Binding GraphWidth}">
                             <sparrow:SparrowChart.XAxis>
-                                <sparrow:LinearXAxis/>
+                                <sparrow:CategoryXAxis/>
+                                <!--<sparrow:LinearXAxis  ScrollViewer.HorizontalScrollBarVisibility="Auto"/>-->
                             </sparrow:SparrowChart.XAxis>
                             <sparrow:SparrowChart.YAxis>
-                                <sparrow:LinearYAxis/>
+                                <sparrow:LinearYAxis MinValue="0" Interval="{Binding GraphInterval}"/>
                             </sparrow:SparrowChart.YAxis>
-                            <sparrow:LineSeries>
-                                <sparrow:LineSeries.Points>
-                                    <sparrow:DoublePoint Data="44" Value="3"/>
-                                    <sparrow:DoublePoint Data="45" Value="7"/>
-                                    <sparrow:DoublePoint Data="46" Value="1"/>
-                                    <sparrow:DoublePoint Data="47" Value="0"/>
-                                    <sparrow:DoublePoint Data="48" Value="12"/>
-                                    <sparrow:DoublePoint Data="49" Value="9"/>
-                                </sparrow:LineSeries.Points>
-                            </sparrow:LineSeries>
+                            <sparrow:ColumnSeries PointsSource="{Binding GraphCollection}" XPath="Week" YPath="Hours" />
                         </sparrow:SparrowChart>
+                        </ScrollViewer>
 
                         <!-- Chart labels -->
                         <TextBlock Grid.Row="3" Text="Hours" Margin="0,0,-150,40" Height="25" FontSize="{StaticResource PhoneFontSizeSmall}" VerticalAlignment="Bottom">
@@ -168,7 +161,6 @@
                         </TextBlock>
                         <TextBlock Grid.Row="4" Grid.Column="1" Text="Week number" Margin="80,-5,0,5" FontSize="{StaticResource PhoneFontSizeSmall}"/>
                     </Grid>
-                </ScrollViewer>
             </phone:PivotItem>
 
         </phone:Pivot>
