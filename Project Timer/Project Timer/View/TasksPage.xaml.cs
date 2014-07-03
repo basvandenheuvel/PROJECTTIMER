@@ -41,9 +41,18 @@ namespace Project_Timer.View
                 //Refresh the tasks
                 refreshTasks();
 
-                //Set default pivot page
-                //mainPivot.SelectedIndex = 0;
+                if (vm.Project.Finished)
+                {
+                    //Disable the add button if the project is finished
+                    ApplicationBarIconButton buttonAdd = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+                    buttonAdd.IsEnabled = false;
+
+                    //Disable the edit project button if the project is finished
+                    ApplicationBarMenuItem itemEdit = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
+                    itemEdit.IsEnabled = false;
+                }
             }
+
         }
 
         private void AddTaskClicked(object sender, EventArgs e)
@@ -53,27 +62,30 @@ namespace Project_Timer.View
 
         private void deleteTaskClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //Get the project
-            Task task = (Task)((MenuItem)sender).DataContext;
-
-            //Prompt the user if he/she is sure 
-            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the task " + task.Name + "?", "Delete task?", MessageBoxButton.OKCancel);
-
-            if (mbr == MessageBoxResult.OK)
+            if (!vm.Project.Finished)
             {
-                //Delete project
-                vm.deleteTask(task);
+                //Get the project
+                Task task = (Task)((MenuItem)sender).DataContext;
 
-                if (task.Finished)
-                {
-                    checkAmountOfFinishedTasks();
-                }
-                else
-                {
-                    checkAmountOfTasks();
-                }
+                //Prompt the user if he/she is sure 
+                MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the task " + task.Name + "?", "Delete task?", MessageBoxButton.OKCancel);
 
-                RefreshContextMenu(sender);
+                if (mbr == MessageBoxResult.OK)
+                {
+                    //Delete project
+                    vm.deleteTask(task);
+
+                    if (task.Finished)
+                    {
+                        checkAmountOfFinishedTasks();
+                    }
+                    else
+                    {
+                        checkAmountOfTasks();
+                    }
+
+                    RefreshContextMenu(sender);
+                }
             }
         }
         
@@ -128,16 +140,19 @@ namespace Project_Timer.View
 
         private void toggleFinished(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //Get the task
-            Task task = (Task)((MenuItem)sender).DataContext;
+            if (!vm.Project.Finished)
+            {
+                //Get the task
+                Task task = (Task)((MenuItem)sender).DataContext;
 
-            //Mark the project as finished
-            vm.toggleFinished(task);
+                //Mark the project as finished
+                vm.toggleFinished(task);
 
-            checkAmountOfFinishedTasks();
-            checkAmountOfTasks();
+                checkAmountOfFinishedTasks();
+                checkAmountOfTasks();
 
-            RefreshContextMenu(sender);
+                RefreshContextMenu(sender);
+            }
         }
 
         private void projectInfoClicked(object sender, EventArgs e)
@@ -151,5 +166,13 @@ namespace Project_Timer.View
             ContextMenu cm = (ContextMenu)((MenuItem)sender).Parent;
             cm.ClearValue(FrameworkElement.DataContextProperty);
         }
+
+        private void Grid_Hold(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (vm.Project.Finished)
+            {
+                e.Handled = true;
+            }
+        } 
     }
 }

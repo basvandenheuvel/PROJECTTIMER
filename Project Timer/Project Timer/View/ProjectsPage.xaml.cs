@@ -83,11 +83,9 @@ namespace Project_Timer
         {
             Project project = (Project)((Grid)sender).DataContext;
             
-            //Open taskpage
-            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id="+ project.Id, UriKind.RelativeOrAbsolute));
+            App.RootFrame.Navigate(new Uri("/View/TasksPage.xaml?id=" + project.Id, UriKind.RelativeOrAbsolute));
         }
-
-
+        
         private void refreshProjects()
         {
             vm.refreshProjects();

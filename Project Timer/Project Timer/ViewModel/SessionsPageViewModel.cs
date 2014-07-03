@@ -83,6 +83,14 @@ namespace Project_Timer.ViewModel
                 Title = projectModel.Name + " - " + taskModel.Name;
             }
         }
+        public Project Project
+        {
+            get { return projectModel; }
+        }
+        public Project_Timer.Model.Task Task
+        {
+            get { return taskModel; }
+        }
         #endregion
 
 

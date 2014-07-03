@@ -52,8 +52,16 @@ namespace Project_Timer.View
                 //Refresh the worktimes
                 refreshWorktimes();
 
-                //Set default pivot page
-                //mainPivot.SelectedIndex = 0;
+                if (vm.Project.Finished || vm.Task.Finished)
+                {
+                    //Disable the add button if the project or task is finished
+                    ApplicationBarIconButton buttonAdd = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+                    buttonAdd.IsEnabled = false;
+
+                    //Disable the edit project button if the project or task is finished
+                    ApplicationBarMenuItem itemEdit = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
+                    itemEdit.IsEnabled = false;
+                }
             }
         }
 
@@ -90,18 +98,21 @@ namespace Project_Timer.View
 
         private void deleteSessionClicked(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //Get the worktime
-            Session session = (Session)((MenuItem)sender).DataContext;
-
-            //Prompt the user if he/she is sure 
-            MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the session?", "Delete session?", MessageBoxButton.OKCancel);
-
-            if (mbr == MessageBoxResult.OK)
+            if (!vm.Project.Finished && !vm.Task.Finished)
             {
-                //Delete project
-                vm.deleteSession(session);
+                //Get the worktime
+                Session session = (Session)((MenuItem)sender).DataContext;
 
-                checkAmountOfWorktimes();
+                //Prompt the user if he/she is sure 
+                MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete the session?", "Delete session?", MessageBoxButton.OKCancel);
+
+                if (mbr == MessageBoxResult.OK)
+                {
+                    //Delete project
+                    vm.deleteSession(session);
+
+                    checkAmountOfWorktimes();
+                }
             }
         }
 
@@ -109,5 +120,13 @@ namespace Project_Timer.View
         {
             App.RootFrame.Navigate(new Uri("/View/AddSessionPage.xaml?tid=" + taskId, UriKind.RelativeOrAbsolute));
         }
+
+        private void Grid_Hold(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (vm.Project.Finished || vm.Task.Finished)
+            {
+                e.Handled = true;
+            }
+        } 
     }
 }

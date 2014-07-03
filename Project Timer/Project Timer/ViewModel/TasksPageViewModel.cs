@@ -235,6 +235,10 @@ namespace Project_Timer.ViewModel
         {
             get { return projectModel.getAmountOfHours(); }
         }
+        public Project Project
+        {
+            get { return projectModel; }
+        }
         public String ProjectName
         {
             get { return projectModel.Name; }

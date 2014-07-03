@@ -54,7 +54,7 @@
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
 
-                                <Grid Margin="15,0,0,0">
+                                <Grid Margin="15,0,0,0" Hold="Grid_Hold">
                                     <toolkit:ContextMenuService.ContextMenu>
                                         <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu" >
                                             <toolkit:MenuItem x:Name="Delete" Header="delete session" Tap="deleteSessionClicked" />
