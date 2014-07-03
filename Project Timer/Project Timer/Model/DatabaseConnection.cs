@@ -32,9 +32,10 @@ namespace Project_Timer.Model
             if (conn.Table<ProjectTable>().Count() == 0)
             {
 
-                conn.Insert(new SessionTable() { description = "andere helft gemaakt", elapsed_time = new TimeSpan(20, 0, 0), task_id = 1, start_time = new DateTime(2014, 06, 29, 00, 15, 00) });
+                conn.Insert(new SessionTable() { description = "andere helft gemaakt", elapsed_time = new TimeSpan(22, 0, 0), task_id = 1, start_time = new DateTime(2014, 06, 29, 00, 15, 00) });
                 conn.Insert(new SessionTable() { description = "back-end half gemaakt", elapsed_time = new TimeSpan(10, 0, 0), task_id = 1, start_time = new DateTime(2014, 06, 28, 23, 45, 00) });
                 conn.Insert(new SessionTable() { description = "back-end half gemaakt", elapsed_time = new TimeSpan(10, 0, 0), task_id = 1, start_time = new DateTime(2013, 06, 28, 23, 45, 00) });
+                conn.Insert(new SessionTable() { description = "back-end half gemaakt", elapsed_time = new TimeSpan(10, 0, 0), task_id = 1, start_time = new DateTime(2014, 06, 12, 23, 45, 00) });
 
 
                 conn.Insert(new TaskTable() { name = "Back-end maken", description = "Zorgen dat nieuwe boeken kunnen worden toegevoegd", project_id = 1 });

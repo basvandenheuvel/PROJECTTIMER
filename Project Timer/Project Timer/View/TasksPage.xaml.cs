@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Project_Timer.ViewModel;
 using Project_Timer.Model;
+using System.Diagnostics;
 
 namespace Project_Timer.View
 {
@@ -82,6 +83,8 @@ namespace Project_Timer.View
 
             checkAmountOfTasks();
             checkAmountOfFinishedTasks();
+
+            columnChart.YAxis.Interval = vm.GraphInterval;
         }
 
         private void checkAmountOfTasks()

@@ -62,6 +62,8 @@ namespace Project_Timer.ViewModel
                 finishedTasks.Add(task);
             }
 
+            graphCollection.Add(new ChartPoint(" ", 0, 0));
+
             AmountOfTasks = Tasks.Count;
             AmountOfFinishedTasks = FinishedTasks.Count;
 
@@ -70,12 +72,10 @@ namespace Project_Timer.ViewModel
 
             prepInfoForDiagram();
             setGraphInterval();
+
+            graphCollection.Add(new ChartPoint("\r\n", 0, 0));
+
             setGraphWidth();
-
-
-            //OnPropertyChanged("TotalHours");
-
-            //OnPropertyChanged("GraphInterval");
         }
 
         private void prepInfoForDiagram()

@@ -139,13 +139,13 @@
 
                         <!-- chart -->
                         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left"  >
-                        <sparrow:SparrowChart Margin="0,10,10,-10" Width="{Binding GraphWidth}">
+                        <sparrow:SparrowChart Name="columnChart" Margin="0,10,10,-10" Width="{Binding GraphWidth}">
                             <sparrow:SparrowChart.XAxis>
                                 <sparrow:CategoryXAxis/>
                                 <!--<sparrow:LinearXAxis  ScrollViewer.HorizontalScrollBarVisibility="Auto"/>-->
                             </sparrow:SparrowChart.XAxis>
                             <sparrow:SparrowChart.YAxis>
-                                <sparrow:LinearYAxis MinValue="0" Interval="{Binding GraphInterval}"/>
+                                <sparrow:LinearYAxis MinValue="0" />
                             </sparrow:SparrowChart.YAxis>
                             <sparrow:ColumnSeries PointsSource="{Binding GraphCollection}" XPath="Week" YPath="Hours" />
                         </sparrow:SparrowChart>
